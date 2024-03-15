@@ -1,0 +1,38 @@
+\input{regression-test.tex}
+\documentclass[degree=bachelor,fontset=fandol]{ustcthesis}
+
+\usepackage[style=ustcthesis-bachelor]{biblatex}
+\addbibresource{refs-bachelor.bib}
+
+\pagestyle{empty}
+
+\begin{document}
+\START
+\showoutput
+
+引用\citet{liuwenfu2000wangluo}测试\par
+引用\citet[42]{liuwenfu2000wangluo}测试\par
+引用\citep{liuwenfu2000wangluo}测试\par
+引用\citep[42]{liuwenfu2000wangluo}测试\par
+引用\citep[见][]{xiaodu2000zhishi}测试\par
+引用\citep[见][42]{xiaodu2000zhishi}测试\par
+
+Citation \citet{betts2005aging} test\par
+Citation \citet[42]{betts2005aging} test\par
+Citation\citep{betts2005aging} test\par
+Citation\citep[42]{betts2005aging} test\par
+Citation \citep[see][]{bravo1990comparative} test\par
+Citation \citep[see][42]{bravo1990comparative} test\par
+
+引用\citep{liuwenfu2000wangluo}测试\par
+引用\citep{liuwenfu2000wangluo,xiaodu2000zhishi}测试\par
+引用\citep{liuwenfu2000wangluo,xiaodu2000zhishi,betts2005aging}测试\par
+
+\nocite{*}
+
+\backmatter
+\printbibliography
+
+\clearpage
+\end{document}
+\END

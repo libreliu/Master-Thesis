@@ -1,0 +1,714 @@
+
+@misc{AMDRDNAWhitepaper,
+  author = {AMD},
+  title = {{RDNA Architecture Whitepaper}},
+  howpublished = {\url{https://www.amd.com/system/files/documents/rdna-whitepaper.pdf}},
+  note = {Accessed: 2023-12-02},
+  year = {2019}
+}
+
+@misc{NVIDIAAdaWhitepaper,
+  author = {NVIDIA},
+  title = {NVIDIA Ada GPU Architecture},
+  howpublished = {\url{https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf}},
+  note = {Accessed: 2023-12-02},
+  year = {2023}
+}
+
+@misc{RDNAPerformanceGuide,
+  author = {AMD},
+  title = {{RDNA Performance Guide}},
+  howpublished = {\url{https://gpuopen.com/learn/rdna-performance-guide/}},
+  note = {Accessed: 2023-12-02},
+  year = {2023}
+}
+
+
+% Prior works
+
+@inproceedings{10.1145/3559009.3569666,
+author = {Bao, Yuhui and Sun, Yifan and Feric, Zlatan and Shen, Michael Tian and Weston, Micah and Abell\'{a}n, Jos\'{e} L. and Baruah, Trinayan and Kim, John and Joshi, Ajay and Kaeli, David},
+title = {NaviSim: A Highly Accurate GPU Simulator for AMD RDNA GPUs},
+year = {2023},
+isbn = {9781450398688},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3559009.3569666},
+doi = {10.1145/3559009.3569666},
+abstract = {As GPUs continue to grow in popularity for accelerating demanding applications, such as high-performance computing and machine learning, GPU architects need to deliver more powerful devices with updated instruction set architectures (ISAs) and new microarchitectural features. The introduction of the AMD RDNA architecture is one example where the GPU architecture was dramatically changed, modifying the underlying programming model, the core architecture, and the cache hierarchy. To date, no publicly-available simulator infrastructure can model the AMD RDNA GPU, preventing researchers from exploring new GPU designs based on the state-of-the-art RDNA architecture.In this paper, we present the NaviSim simulator, the first cycle-level GPU simulator framework that models AMD RDNA GPUs. NaviSim faithfully emulates the new RDNA ISA. We extensively tune and validate NaviSim using several microbenchmarks and 10 full workloads. Our evaluation shows that NaviSim can accurately model the GPU's kernel execution time, achieving similar performance to hardware execution within 9.92\% (on average), as measured on an AMD RX 5500 XT GPU and an AMD Radeon Pro W6800 GPU.To demonstrate the full utility of the NaviSim simulator, we carry out a performance study of the impact of individual RDNA features, attempting to understand better the design decisions behind these features. We carry out a number of experiments to isolate each RDNA feature and evaluate its impact on overall performance, as well as demonstrate the usability and flexibility of NaviSim.},
+booktitle = {Proceedings of the International Conference on Parallel Architectures and Compilation Techniques},
+pages = {333–345},
+numpages = {13},
+keywords = {GPU, simulation, computer architecture},
+location = {Chicago, Illinois},
+series = {PACT '22}
+}
+
+@article{LEMEIRE202332,
+title = {Analysis of the analytical performance models for GPUs and extracting the underlying Pipeline model},
+journal = {Journal of Parallel and Distributed Computing},
+volume = {173},
+pages = {32-47},
+year = {2023},
+issn = {0743-7315},
+doi = {https://doi.org/10.1016/j.jpdc.2022.11.002},
+url = {https://www.sciencedirect.com/science/article/pii/S0743731522002295},
+author = {Jan Lemeire and Jan G. Cornelis and Elias Konstantinidis},
+keywords = {GPU computing, GPU architecture, Analytical performance models},
+abstract = {This work presents an in-depth study of the analytical models for the performance estimation of GPUs. We show that the models' analytical equations can be derived from a pipeline analogy that models each GPU subsystem as an abstract pipeline. We call this the Pipeline model. All the equations are reformulated based on generic pipeline characteristics, namely throughput and latency. Our analysis shows equivalences between models and reveals substantial problems with some of the equations. Rather than relying on equations, the Pipeline model is then used to simulate the behavior of kernel executions based on the same hardware parameters as the analytical models. The simplicity of the model and relying on simulation mean that this approach needs less assumptions, is more comprehensive and is more flexible. More performance aspects can be taken into consideration. The different models are compared and evaluated empirically with 14 kernels of the Rodinia benchmark suite with varying occupancy. The Pipeline model gives an average MAPE of 24, while the average MAPE values of the other models lie between 27 and 136.}
+}
+
+@article{10.1145/1498765.1498785,
+author = {Williams, Samuel and Waterman, Andrew and Patterson, David},
+title = {Roofline: An Insightful Visual Performance Model for Multicore Architectures},
+year = {2009},
+issue_date = {April 2009},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {52},
+number = {4},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/1498765.1498785},
+doi = {10.1145/1498765.1498785},
+abstract = {The Roofline model offers insight on how to improve the performance of software and hardware.},
+journal = {Commun. ACM},
+month = {apr},
+pages = {65–76},
+numpages = {12}
+}
+
+@article{KONSTANTINIDIS201737,
+title = {A quantitative roofline model for GPU kernel performance estimation using micro-benchmarks and hardware metric profiling},
+journal = {Journal of Parallel and Distributed Computing},
+volume = {107},
+pages = {37-56},
+year = {2017},
+issn = {0743-7315},
+doi = {https://doi.org/10.1016/j.jpdc.2017.04.002},
+url = {https://www.sciencedirect.com/science/article/pii/S0743731517301247},
+author = {Elias Konstantinidis and Yiannis Cotronis},
+keywords = {Performance estimation, Performance model, Micro-benchmarks, GPU computing, CUDA, HIP},
+abstract = {Typically, the execution time of a kernel on a GPU is a difficult to predict measure as it depends on a wide range of factors. Performance can be limited by either memory transfer, compute throughput or other latencies. In this paper, we improve on the roofline model following a quantitative approach and present a completely automated GPU performance prediction technique. In this respect this model utilizes micro-benchmarking and profiling in a â€œblack boxâ€ fashion as no inspection of source/binary code is required. The proposed model combines parameters in order to characterize the performance limiting factor and to estimate execution time. In addition, we propose the quadrant-split visual representation, which captures the characteristics of multiple processors in relation to a particular kernel. We performed experiments on stencil computation (red/black SOR), SGEMM and a total of 28 kernels of the Rodinia benchmark suite, using six CUDA GPUs and we showed an absolute error in predictions of 27.66\% in the average case. Furthermore, the performance model was also examined on an AMD GPU through the HIP programming environment. Prediction errors were comparable despite the significant architectural differences between different vendor GPUs.}
+}
+
+@INPROCEEDINGS {9975403,
+author = {O. Sykora and P. Phothilimthana and C. Mendis and A. Yazdanbakhsh},
+booktitle = {2022 IEEE International Symposium on Workload Characterization (IISWC)},
+title = {GRANITE: A Graph Neural Network Model for Basic Block Throughput Estimation},
+year = {2022},
+volume = {},
+issn = {},
+pages = {14-26},
+abstract = {Analytical hardware performance models yield swift estimation of desired hardware performance metrics. However, developing these analytical models for modern processors with sophisticated microarchitectures is an extremely laborious task and requires a firm understanding of target microarchitecture’s internal structure. In this paper, we introduce GRANITE1, a new machine learning model that estimates the throughput of basic blocks across different microarchitectures. GRANITE uses a graph representation of basic blocks that captures both structural and data dependencies between instructions. This representation is processed using a graph neural network that takes advantage of the relational information captured in the graph and learns a rich neural representation of the basic block that allows more precise throughput estimation. Our results establish a new state-of-the-art for basic block performance estimation with an average test error of 6.9\% across a wide range of basic blocks and microarchitectures for the x86-64 target. Compared to recent work, this reduced the error by 1.7\% wile improving training and inference throughput by approximately 3.0×. In addition, we propose the use of multitask learning with independent multi-layer feed forward decoder networks. Our results show that this technique further improves precision of all learned models while significantly reducing per-microarchitecture training costs. We perform an extensive set of ablation studies and comparisons with prior work, concluding a set of methods to achieve high accuracy for basic block performance estimation.1GRANITE: A GRAph Neural network model for basIc block Throughput Estimation},
+keywords = {training;analytical models;microarchitecture;estimation;machine learning;predictive models;throughput},
+doi = {10.1109/IISWC55918.2022.00012},
+url = {https://doi.ieeecomputersociety.org/10.1109/IISWC55918.2022.00012},
+publisher = {IEEE Computer Society},
+address = {Los Alamitos, CA, USA},
+month = {nov}
+}
+
+
+@InProceedings{pmlr-v97-mendis19a,
+  title = 	 {Ithemal: Accurate, Portable and Fast Basic Block Throughput Estimation using Deep Neural Networks},
+  author =       {Mendis, Charith and Renda, Alex and Amarasinghe, Dr.Saman and Carbin, Michael},
+  booktitle = 	 {Proceedings of the 36th International Conference on Machine Learning},
+  pages = 	 {4505--4515},
+  year = 	 {2019},
+  editor = 	 {Chaudhuri, Kamalika and Salakhutdinov, Ruslan},
+  volume = 	 {97},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {09--15 Jun},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v97/mendis19a/mendis19a.pdf},
+  url = 	 {https://proceedings.mlr.press/v97/mendis19a.html},
+  abstract = 	 {Predicting the number of clock cycles a processor takes to execute a block of assembly instructions in steady state (the throughput) is important for both compiler designers and performance engineers. Building an analytical model to do so is especially complicated in modern x86-64 Complex Instruction Set Computer (CISC) machines with sophisticated processor microarchitectures in that it is tedious, error prone, and must be performed from scratch for each processor generation. In this paper we present Ithemal, the first tool which learns to predict the throughput of a set of instructions. Ithemal uses a hierarchical LSTM–based approach to predict throughput based on the opcodes and operands of instructions in a basic block. We show that Ithemal is more accurate than state-of-the-art hand-written tools currently used in compiler backends and static machine code analyzers. In particular, our model has less than half the error of state-of-the-art analytical models (LLVM’s llvm-mca and Intel’s IACA). Ithemal is also able to predict these throughput values just as fast as the aforementioned tools, and is easily ported across a variety of processor microarchitectures with minimal developer effort.}
+}
+
+@INPROCEEDINGS{9042166,
+  author={Chen, Yishen and Brahmakshatriya, Ajay and Mendis, Charith and Renda, Alex and Atkinson, Eric and Sýkora, Ondřej and Amarasinghe, Saman and Carbin, Michael},
+  booktitle={2019 IEEE International Symposium on Workload Characterization (IISWC)}, 
+  title={BHive: A Benchmark Suite and Measurement Framework for Validating x86-64 Basic Block Performance Models}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={167-177},
+  doi={10.1109/IISWC47752.2019.9042166}}
+
+@inproceedings{10.1145/3575693.3575737,
+author = {Zhai, Yi and Zhang, Yu and Liu, Shuo and Chu, Xiaomeng and Peng, Jie and Ji, Jianmin and Zhang, Yanyong},
+title = {TLP: A Deep Learning-Based Cost Model for Tensor Program Tuning},
+year = {2023},
+isbn = {9781450399166},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3575693.3575737},
+doi = {10.1145/3575693.3575737},
+abstract = {Tensor program tuning is a non-convex objective optimization problem, to which search-based approaches have proven to be effective. At the core of the search-based approaches lies the design of the cost model. Though deep learning-based cost models perform significantly better than other methods, they still fall short and suffer from the following problems. First, their feature extraction heavily relies on expert-level domain knowledge in hardware architectures. Even so, the extracted features are often unsatisfactory and require separate considerations for CPUs and GPUs. Second, a cost model trained on one hardware platform usually performs poorly on another, a problem we call cross-hardware unavailability. In order to address these problems, we propose TLP and MTL-TLP. TLP is a deep learning-based cost model that facilitates tensor program tuning. Instead of extracting features from the tensor program itself, TLP extracts features from the schedule primitives. We treat schedule primitives as tensor languages. TLP is thus a Tensor Language Processing task. In this way, the task of predicting the tensor program latency through the cost model is transformed into a natural language processing (NLP) regression task. MTL-TLP combines Multi-Task Learning and TLP to cope with the cross-hardware unavailability problem. We incorporate these techniques into the Ansor framework and conduct detailed experiments. Results show that TLP can speed up the average search time by 9.1\texttimes{} and 3.0\texttimes{} on CPU and GPU workloads, respectively, compared to the state-of-the-art implementation. MTL-TLP can achieve a speed-up of 4.7\texttimes{} and 2.9\texttimes{} on CPU and GPU workloads, respectively, using only 7\% of the target hardware data. To the best of our knowledge, TLP is the first tensor program cost model to extract features directly from schedule primitives, and MTL-TLP is the first open-sourced work that effectively addresses the cross-platform unavailability problem. The code is available at https://github.com/zhaiyi000/tlp.},
+booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2},
+pages = {833–845},
+numpages = {13},
+keywords = {tensor program, deep Learning, cost model, compiler optimization},
+location = {Vancouver, BC, Canada},
+series = {ASPLOS 2023}
+}
+
+@inproceedings{10.1145/3524059.3532396,
+author = {Abel, Andreas and Reineke, Jan},
+title = {UiCA: Accurate Throughput Prediction of Basic Blocks on Recent Intel Microarchitectures},
+year = {2022},
+isbn = {9781450392815},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3524059.3532396},
+doi = {10.1145/3524059.3532396},
+abstract = {Performance models that statically predict the steady-state throughput of basic blocks on particular microarchitectures, such as IACA, Ithemal, llvm-mca, OSACA, or CQA, can guide optimizing compilers and aid manual software optimization. However, their utility heavily depends on the accuracy of their predictions. The average error of existing models compared to measurements on the actual hardware has been shown to lie between 9\% and 36\%. But how good is this? To answer this question, we propose an extremely simple analytical throughput model that may serve as a baseline. Surprisingly, this model is already competitive with the state of the art, indicating that there is significant potential for improvement.To explore this potential, we develop a simulation-based throughput predictor. To this end, we propose a detailed parametric pipeline model that supports all Intel Core microarchitecture generations released between 2011 and 2021. We evaluate our predictor on an improved version of the BHive benchmark suite and show that its predictions are usually within 1\% of measurement results, improving upon prior models by roughly an order of magnitude. The experimental evaluation also demonstrates that several microarchitectural details considered to be rather insignificant in previous work, are in fact essential for accurate prediction.Our throughput predictor is available as open source.},
+booktitle = {Proceedings of the 36th ACM International Conference on Supercomputing},
+articleno = {33},
+numpages = {14},
+keywords = {performance, optimization, simulation, pipeline model, benchmarking, throughput prediction},
+location = {Virtual Event},
+series = {ICS '22}
+}
+
+
+@INPROCEEDINGS{10289219,
+  author={Abel, Andreas and Sharma, Shrey and Reineke, Jan},
+  booktitle={2023 IEEE International Symposium on Workload Characterization (IISWC)}, 
+  title={Facile: Fast, Accurate, and Interpretable Basic-Block Throughput Prediction}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={87-99},
+  doi={10.1109/IISWC59245.2023.00023}}
+
+@INPROCEEDINGS{9138922,
+  author={Khairy, Mahmoud and Shen, Zhesheng and Aamodt, Tor M. and Rogers, Timothy G.},
+  booktitle={2020 ACM/IEEE 47th Annual International Symposium on Computer Architecture (ISCA)}, 
+  title={Accel-Sim: An Extensible Simulation Framework for Validated GPU Modeling}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={473-486},
+  doi={10.1109/ISCA45697.2020.00047}}
+
+@INPROCEEDINGS{4919648,
+  author={Bakhoda, Ali and Yuan, George L. and Fung, Wilson W. L. and Wong, Henry and Aamodt, Tor M.},
+  booktitle={2009 IEEE International Symposium on Performance Analysis of Systems and Software}, 
+  title={Analyzing CUDA workloads using a detailed GPU simulator}, 
+  year={2009},
+  volume={},
+  number={},
+  pages={163-174},
+  doi={10.1109/ISPASS.2009.4919648}}
+
+@article{10.1145/3126557,
+author = {O'neal, Kenneth and Brisk, Philip and Abousamra, Ahmed and Waters, Zack and Shriver, Emily},
+title = {GPU Performance Estimation Using Software Rasterization and Machine Learning},
+year = {2017},
+issue_date = {October 2017},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {16},
+number = {5s},
+issn = {1539-9087},
+url = {https://doi.org/10.1145/3126557},
+doi = {10.1145/3126557},
+abstract = {This paper introduces a predictive modeling framework to estimate the performance of GPUs during pre-silicon design. Early-stage performance prediction is useful when simulation times impede development by rendering driver performance validation, API conformance testing and design space explorations infeasible. Our approach builds a Random Forest regression model to analyze DirectX 3D workload behavior when executed by a software rasterizer, which we have extended with a workload characterizer to collect further performance information via program counters. In addition to regression models, this work produces detailed feature rankings which can provide valuable architectural insight, and accurate performance estimates for an Intel integrated Skylake generation GPU. Our models achieve reasonable out-of-sample-error rates of 14\%, with an average simulation speedup of 327x.},
+journal = {ACM Trans. Embed. Comput. Syst.},
+month = {sep},
+articleno = {148},
+numpages = {21},
+keywords = {GPU simulation, predictive model, random forest regression}
+}
+
+@inproceedings{10.1145/3307650.3322221,
+author = {Gubran, Ayub A. and Aamodt, Tor M.},
+title = {Emerald: Graphics Modeling for SoC Systems},
+year = {2019},
+isbn = {9781450366694},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3307650.3322221},
+doi = {10.1145/3307650.3322221},
+abstract = {Mobile systems-on-chips (SoCs) have become ubiquitous computing platforms, and, in recent years, they have become increasingly heterogeneous and complex. A typical SoC includes CPUs, graphics processor units (GPUs), image processors, video encoders/decoders, AI engines, digital signal processors (DSPs) and 2D engines among others [33, 70, 71]. One of the most significant SoC units in terms of both off-chip memory bandwidth and SoC die area is the GPU. In this paper, we present Emerald, a simulator that builds on existing tools to provide a unified model for graphics and GPGPU applications. Emerald enables OpenGL (v4.5) and OpenGL ES (v3.2) shaders to run on GPGPU-Sim's timing model and is integrated with gem5 and Android to simulate full SoCs. Emerald thus provides a platform for studying system-level SoC interactions while including the impact of graphics.We present two case studies using Emerald. First, we use Emerald's full-system mode to highlight the importance of system-wide interactions by studying and analyzing memory organization and scheduling schemes for SoC systems. Second, we use Emerald's standalone mode to evaluate a novel mechanism for balancing the graphics shading work assigned to each GPU core.},
+booktitle = {Proceedings of the 46th International Symposium on Computer Architecture},
+pages = {169–182},
+numpages = {14},
+keywords = {GPU, simulation, SoC, graphics},
+location = {Phoenix, Arizona},
+series = {ISCA '19}
+}
+
+@INPROCEEDINGS{8167756,
+  author={Sembrant, Andreas and Carlson, Trevor E. and Hagersten, Erik and Black-Schaffer, David},
+  booktitle={2017 IEEE International Symposium on Workload Characterization (IISWC)}, 
+  title={A graphics tracing framework for exploring CPU+GPU memory systems}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={54-65},
+  doi={10.1109/IISWC.2017.8167756}}
+
+
+@INPROCEEDINGS{8366956,
+  author={Crawford, Lewis and O'Boyle, Michael},
+  booktitle={2018 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)}, 
+  title={A Cross-platform Evaluation of Graphics Shader Compiler Optimization}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={219-228},
+  doi={10.1109/ISPASS.2018.00035}}
+
+@INPROCEEDINGS{8891638,
+  author={Crawford, Lewis and O'Boyle, Michael},
+  booktitle={2019 28th International Conference on Parallel Architectures and Compilation Techniques (PACT)}, 
+  title={Specialization Opportunities in Graphical Workloads}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={272-283},
+  doi={10.1109/PACT.2019.00029}}
+
+@article{10.1145/2816795.2818104,
+author = {He, Yong and Foley, Tim and Tatarchuk, Natalya and Fatahalian, Kayvon},
+title = {A System for Rapid, Automatic Shader Level-of-Detail},
+year = {2015},
+issue_date = {November 2015},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {34},
+number = {6},
+issn = {0730-0301},
+url = {https://doi.org/10.1145/2816795.2818104},
+doi = {10.1145/2816795.2818104},
+abstract = {Level-of-detail (LOD) rendering is a key optimization used by modern video game engines to achieve high-quality rendering with fast performance. These LOD systems require simplified shaders, but generating simplified shaders remains largely a manual optimization task for game developers. Prior efforts to automate this process have taken hours to generate simplified shader candidates, making them impractical for use in modern shader authoring workflows for complex scenes. We present an end-to-end system for automatically generating a LOD policy for an input shader. The system operates on shaders used in both forward and deferred rendering pipelines, requires no additional semantic information beyond input shader source code, and in only seconds to minutes generates LOD policies (consisting of simplified shader, the desired LOD distance set, and transition generation) with performance and quality characteristics comparable to custom hand-authored solutions. Our design contributes new shader simplification transforms such as approximate common subexpression elimination and movement of GPU logic to parameter bind-time processing on the CPU, and it uses a greedy search algorithm that employs extensive caching and upfront collection of input shader statistics to rapidly identify simplified shaders with desirable performance-quality trade-offs.},
+journal = {ACM Trans. Graph.},
+month = {nov},
+articleno = {187},
+numpages = {12},
+keywords = {shader optimization, shader simplification, level-of-detail, real-time rendering}
+}
+
+@article{10.1145/2070781.2024186,
+author = {Sitthi-Amorn, Pitchaya and Modly, Nicholas and Weimer, Westley and Lawrence, Jason},
+title = {Genetic Programming for Shader Simplification},
+year = {2011},
+issue_date = {December 2011},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {30},
+number = {6},
+issn = {0730-0301},
+url = {https://doi.org/10.1145/2070781.2024186},
+doi = {10.1145/2070781.2024186},
+abstract = {We present a framework based on Genetic Programming (GP) for automatically simplifying procedural shaders. Our approach computes a series of increasingly simplified shaders that expose the inherent trade-off between speed and accuracy. Compared to existing automatic methods for pixel shader simplification [Olano et al. 2003; Pellacini 2005], our approach considers a wider space of code transformations and produces faster and more faithful results. We further demonstrate how our cost function can be rapidly evaluated using graphics hardware, which allows tens of thousands of shader variants to be considered during the optimization process. Our approach is also applicable to multi-pass shaders and perceptual-based error metrics.},
+journal = {ACM Trans. Graph.},
+month = {dec},
+pages = {1–12},
+numpages = {12},
+keywords = {code simplification, genetic programming, pixel shaders, procedural texturing}
+}
+
+@article{10.1145/2661229.2661276,
+author = {Wang, Rui and Yang, Xianjin and Yuan, Yazhen and Chen, Wei and Bala, Kavita and Bao, Hujun},
+title = {Automatic Shader Simplification Using Surface Signal Approximation},
+year = {2014},
+issue_date = {November 2014},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {33},
+number = {6},
+issn = {0730-0301},
+url = {https://doi.org/10.1145/2661229.2661276},
+doi = {10.1145/2661229.2661276},
+abstract = {In this paper, we present a new automatic shader simplification method using surface signal approximation. We regard the entire multi-stage rendering pipeline as a process that generates signals on surfaces, and we formulate the simplification of the fragment shader as a global simplification problem across multi-shader stages. Three new shader simplification rules are proposed to solve the problem. First, the code transformation rule transforms fragment shader code to other shader stages in order to redistribute computations on pixels up to the level of geometry primitives. Second, the surface-wise approximation rule uses high-order polynomial basis functions on surfaces to approximate pixel-wise computations in the fragment shader. These approximations are pre-cached and simplify computations at runtime. Third, the surface subdivision rule tessellates surfaces into smaller patches. It combines with the previous two rules to approximate pixel-wise signals at different levels of tessellations with different computation times and visual errors. To evaluate simplified shaders using these simplification rules, we introduce a new cost model that includes the visual quality, rendering time and memory consumption. With these simplification rules and the cost model, we present an integrated shader simplification algorithm that is capable of automatically generating variants of simplified shaders and selecting a sequence of preferable shaders. Results show that the sequence of selected simplified shaders balance performance, accuracy and memory consumption well.},
+journal = {ACM Trans. Graph.},
+month = {nov},
+articleno = {226},
+numpages = {11},
+keywords = {surface signal approximation, shader simplification, real-time rendering, GPU shader}
+}
+
+@ARTICLE{9815871,
+  author={Liang, Yuzhi and Song, Qi and Wang, Rui and Huo, Yuchi and Bao, Hujun},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={Automatic Mesh and Shader Level of Detail}, 
+  year={2023},
+  volume={29},
+  number={10},
+  pages={4284-4295},
+  doi={10.1109/TVCG.2022.3188775}}
+
+@inproceedings{10.1145/3528233.3530722,
+author = {Huo, Yuchi and Li, Shi and Yuan, Yazhen and Chen, Xu and Wang, Rui and Zheng, Wenting and Lin, Hai and Bao, Hujun},
+title = {ShaderTransformer: Predicting Shader Quality via One-Shot Embedding for Fast Simplification},
+year = {2022},
+isbn = {9781450393379},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3528233.3530722},
+doi = {10.1145/3528233.3530722},
+abstract = {Given specific scene configurations and target functions, automatic shader simplification searches for the best simplified shader variant from an optimization space with many candidates. Although various speedup methods have been proposed, there is still a costly render-and-evaluate process to obtain variant’s performance and quality, especially when the scene changes. In this paper, we present a deep learning-based framework for predicting a shader’s simplification space, where the shader’s variants can be embedded into a metric space all at once for efficient quality evaluation. The novel framework allows the one-shot embedding of a space rather than a single instance. In addition, the simplification errors can be interpreted by mutual attention between shader fragments, presenting an informative focus-aware simplification framework that can assist experts in optimizing the codes. The results show that the new framework achieves significant speedup compared with existing search approaches. The focus-aware simplification framework reveals a new possibility of interpreting shaders for various applications.},
+booktitle = {ACM SIGGRAPH 2022 Conference Proceedings},
+articleno = {44},
+numpages = {9},
+keywords = {Real-time Rendering, Transformer, Shader Simplification},
+location = {Vancouver, BC, Canada},
+series = {SIGGRAPH '22}
+}
+
+@article{10.1111/cgf.13482,
+author = {Yuan, Yazhen and Wang, Rui and Hu, Tianlei and Bao, Hujun},
+title = {Runtime Shader Simplification via Instant Search in Reduced Optimization Space},
+journal = {Computer Graphics Forum},
+volume = {37},
+number = {4},
+pages = {143-154},
+keywords = {CCS Concepts, •Computing methodologies → Shader simplification, Runtime optimization},
+doi = {https://doi.org/10.1111/cgf.13482},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.13482},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.13482},
+abstract = {Abstract Traditional automatic shader simplification simplifies shaders in an offline process, which is typically carried out in a context-oblivious manner or with the use of some example contexts, e.g., certain hardware platforms, scenes, and uniform parameters, etc. As a result, these pre-simplified shaders may fail at adapting to runtime changes of the rendering context that were not considered in the simplification process. In this paper, we propose a new automatic shader simplification technique, which explores two key aspects of a runtime simplification framework: the optimization space and the instant search for optimal simplified shaders with runtime context. The proposed technique still requires a preprocess stage to process the original shader. However, instead of directly computing optimal simplified shaders, the proposed preprocess generates a reduced shader optimization space. In particular, two heuristic estimates of the quality and performance of simplified shaders are presented to group similar variants into representative ones, which serve as basic graph nodes of the simplification dependency graph (SDG), a new representation of the optimization space. At the runtime simplification stage, a parallel discrete optimization algorithm is employed to instantly search in the SDG for optimal simplified shaders. New data-driven cost models are proposed to predict the runtime quality and performance of simplified shaders on the basis of data collected during runtime. Results show that the selected simplifications of complex shaders achieve 1.6 to 2.5 times speedup and still retain high rendering quality.},
+year = {2018}
+}
+
+
+@article{Born2023,
+author={Born, Jannis
+and Manica, Matteo},
+title={Regression Transformer enables concurrent sequence regression and generation for molecular language modelling},
+journal={Nature Machine Intelligence},
+year={2023},
+month={Apr},
+day={01},
+volume={5},
+number={4},
+pages={432-444},
+abstract={Despite tremendous progress of generative models in the natural sciences, their controllability remains challenging. One fundamentally missing aspect of molecular or protein generative models is an inductive bias that can reflect continuous properties of interest. To that end, we propose the Regression Transformer (RT), a method that abstracts regression as a conditional sequence modelling problem. This introduces a new direction for multitask language models, seamlessly bridging sequence regression and conditional sequence generation. We demonstrate that, despite using a nominal-scale training objective, the RT matches or surpasses the performance of conventional regression models in property prediction of small molecules, proteins and chemical reactions. Critically, priming the same model with continuous properties yields a competitive conditional generative model that outperforms specialized approaches in a substructure-constrained, property-driven molecule generation benchmark. Our dichotomous approach is facilitated by an alternating training scheme that enables the model to decorate seed sequences on the basis of desired property constraints, for example, to optimize reaction yield. We expect that the RT's capability to jointly tackle predictive and generative tasks in biochemistry can find applications in property-driven, local exploration of the chemical or protein space. Such multitask approaches will pave the road towards foundation models in materials design.},
+issn={2522-5839},
+doi={10.1038/s42256-023-00639-z},
+url={https://doi.org/10.1038/s42256-023-00639-z}
+}
+
+@article{Hart1996,
+author={Hart, John C.},
+title={Sphere tracing: a geometric method for the antialiased ray tracing of implicit surfaces},
+journal={The Visual Computer},
+year={1996},
+month={Dec},
+day={01},
+volume={12},
+number={10},
+pages={527-545},
+issn={1432-2315},
+doi={10.1007/s003710050084},
+url={https://doi.org/10.1007/s003710050084}
+}
+
+@article{https://doi.org/10.1111/cgf.14457,
+author = {Yang, Y. and Barnes, C. and Finkelstein, A.},
+title = {Learning from Shader Program Traces},
+journal = {Computer Graphics Forum},
+volume = {41},
+number = {2},
+pages = {41-56},
+keywords = {CCS Concepts, • Computing methodologies → Neural networks, Computer graphics, • Software and its engineering → Compilers},
+doi = {https://doi.org/10.1111/cgf.14457},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14457},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14457},
+abstract = {Abstract Deep learning for image processing typically treats input imagery as pixels in some color space. This paper proposes instead to learn from program traces of procedural fragment shaders – programs that generate images. At each pixel, we collect the intermediate values computed at program execution, and these data form the input to the learned model. We investigate this learning task for a variety of applications: our model can learn to predict a low-noise output image from shader programs that exhibit sampling noise; this model can also learn from a simplified shader program that approximates the reference solution with less computation, as well as learn the output of postprocessing filters like defocus blur and edge-aware sharpening. Finally we show that the idea of learning from program traces can even be applied to non-imagery simulations of flocks of boids. Our experiments on a variety of shaders show quantitatively and qualitatively that models learned from program traces outperform baseline models learned from RGB color augmented with hand-picked shader-specific featues like normals, depth, and diffuse and specular color. We also conduct a series of analyses that show certain features within the trace are more important, and even learning from a small subset of the trace outperforms the baselines.},
+year = {2022}
+}
+
+@misc{Kingma2014AdamAM,
+      title={Adam: A Method for Stochastic Optimization}, 
+      author={Diederik P. Kingma and Jimmy Ba},
+      year={2017},
+      eprint={1412.6980},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@inproceedings{Vaswani2017AttentionIA,
+ author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N and Kaiser, \L ukasz and Polosukhin, Illia},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {I. Guyon and U. Von Luxburg and S. Bengio and H. Wallach and R. Fergus and S. Vishwanathan and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Attention is All you Need},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf},
+ volume = {30},
+ year = {2017}
+}
+
+
+@inproceedings{devlin-etal-2019-bert,
+    title = "{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    author = "Devlin, Jacob  and
+      Chang, Ming-Wei  and
+      Lee, Kenton  and
+      Toutanova, Kristina",
+    editor = "Burstein, Jill  and
+      Doran, Christy  and
+      Solorio, Thamar",
+    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+    month = jun,
+    year = "2019",
+    address = "Minneapolis, Minnesota",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/N19-1423",
+    doi = "10.18653/v1/N19-1423",
+    pages = "4171--4186",
+    abstract = "We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models (Peters et al., 2018a; Radford et al., 2018), BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5 (7.7 point absolute improvement), MultiNLI accuracy to 86.7{\%} (4.6{\%} absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement).",
+}
+
+@inproceedings{feng-etal-2020-codebert,
+    title = "{C}ode{BERT}: A Pre-Trained Model for Programming and Natural Languages",
+    author = "Feng, Zhangyin  and
+      Guo, Daya  and
+      Tang, Duyu  and
+      Duan, Nan  and
+      Feng, Xiaocheng  and
+      Gong, Ming  and
+      Shou, Linjun  and
+      Qin, Bing  and
+      Liu, Ting  and
+      Jiang, Daxin  and
+      Zhou, Ming",
+    editor = "Cohn, Trevor  and
+      He, Yulan  and
+      Liu, Yang",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2020",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.findings-emnlp.139",
+    doi = "10.18653/v1/2020.findings-emnlp.139",
+    pages = "1536--1547",
+    abstract = "We present CodeBERT, a bimodal pre-trained model for programming language (PL) and natural language (NL). CodeBERT learns general-purpose representations that support downstream NL-PL applications such as natural language code search, code documentation generation, etc. We develop CodeBERT with Transformer-based neural architecture, and train it with a hybrid objective function that incorporates the pre-training task of replaced token detection, which is to detect plausible alternatives sampled from generators. This enables us to utilize both {``}bimodal{''} data of NL-PL pairs and {``}unimodal data, where the former provides input tokens for model training while the latter helps to learn better generators. We evaluate CodeBERT on two NL-PL applications by fine-tuning model parameters. Results show that CodeBERT achieves state-of-the-art performance on both natural language code search and code documentation generation. Furthermore, to investigate what type of knowledge is learned in CodeBERT, we construct a dataset for NL-PL probing, and evaluate in a zero-shot setting where parameters of pre-trained models are fixed. Results show that CodeBERT performs better than previous pre-trained models on NLPL probing.",
+}
+
+@inproceedings{DBLP:conf/iclr/GuoRLFT0ZDSFTDC21,
+  author       = {Daya Guo and
+                  Shuo Ren and
+                  Shuai Lu and
+                  Zhangyin Feng and
+                  Duyu Tang and
+                  Shujie Liu and
+                  Long Zhou and
+                  Nan Duan and
+                  Alexey Svyatkovskiy and
+                  Shengyu Fu and
+                  Michele Tufano and
+                  Shao Kun Deng and
+                  Colin B. Clement and
+                  Dawn Drain and
+                  Neel Sundaresan and
+                  Jian Yin and
+                  Daxin Jiang and
+                  Ming Zhou},
+  title        = {GraphCodeBERT: Pre-training Code Representations with Data Flow},
+  booktitle    = {9th International Conference on Learning Representations, {ICLR} 2021,
+                  Virtual Event, Austria, May 3-7, 2021},
+  publisher    = {OpenReview.net},
+  year         = {2021},
+  url          = {https://openreview.net/forum?id=jLoC4ez43PZ},
+  timestamp    = {Wed, 23 Jun 2021 17:36:39 +0200},
+  biburl       = {https://dblp.org/rec/conf/iclr/GuoRLFT0ZDSFTDC21.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{ijcai2022p775,
+  title     = {Deep Learning Meets Software Engineering: A Survey on Pre-Trained Models of Source Code},
+  author    = {Niu, Changan and Li, Chuanyi and Luo, Bin and Ng, Vincent},
+  booktitle = {Proceedings of the Thirty-First International Joint Conference on
+               Artificial Intelligence, {IJCAI-22}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},
+  editor    = {Lud De Raedt},
+  pages     = {5546--5555},
+  year      = {2022},
+  month     = {7},
+  note      = {Survey Track},
+  doi       = {10.24963/ijcai.2022/775},
+  url       = {https://doi.org/10.24963/ijcai.2022/775},
+}
+
+@INPROCEEDINGS{8091247,
+  author={Cummins, Chris and Petoumenos, Pavlos and Wang, Zheng and Leather, Hugh},
+  booktitle={2017 26th International Conference on Parallel Architectures and Compilation Techniques (PACT)}, 
+  title={End-to-End Deep Learning of Optimization Heuristics}, 
+  year={2017},
+  volume={},
+  number={},
+  pages={219-232},
+  doi={10.1109/PACT.2017.24}}
+
+@InProceedings{pmlr-v139-cummins21a,
+  title = 	 {ProGraML: A Graph-based Program Representation for Data Flow Analysis and Compiler Optimizations},
+  author =       {Cummins, Chris and Fisches, Zacharias V. and Ben-Nun, Tal and Hoefler, Torsten and O'Boyle, Michael F P and Leather, Hugh},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {2244--2253},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {18--24 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/cummins21a/cummins21a.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/cummins21a.html},
+  abstract = 	 {Machine learning (ML) is increasingly seen as a viable approach for building compiler optimization heuristics, but many ML methods cannot replicate even the simplest of the data flow analyses that are critical to making good optimization decisions. We posit that if ML cannot do that, then it is insufficiently able to reason about programs. We formulate data flow analyses as supervised learning tasks and introduce a large open dataset of programs and their corresponding labels from several analyses. We use this dataset to benchmark ML methods and show that they struggle on these fundamental program reasoning tasks. We propose ProGraML - Program Graphs for Machine Learning - a language-independent, portable representation of program semantics. ProGraML overcomes the limitations of prior works and yields improved performance on downstream optimization tasks.}
+}
+
+
+@InProceedings{pmlr-v139-peng21b,
+  title = 	 {How could Neural Networks understand Programs?},
+  author =       {Peng, Dinglan and Zheng, Shuxin and Li, Yatao and Ke, Guolin and He, Di and Liu, Tie-Yan},
+  booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
+  pages = 	 {8476--8486},
+  year = 	 {2021},
+  editor = 	 {Meila, Marina and Zhang, Tong},
+  volume = 	 {139},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {18--24 Jul},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/peng21b/peng21b.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/peng21b.html},
+  abstract = 	 {Semantic understanding of programs is a fundamental problem for programming language processing (PLP). Recent works that learn representations of code based on pre-training techniques in NLP have pushed the frontiers in this direction. However, the semantics of PL and NL have essential differences. These being ignored, we believe it is difficult to build a model to better understand programs, by either directly applying off-the-shelf NLP pre-training techniques to the source code, or adding features to the model by the heuristic. In fact, the semantics of a program can be rigorously defined by formal semantics in PL theory. For example, the operational semantics, describes the meaning of a valid program as updating the environment (i.e., the memory address-value function) through fundamental operations, such as memory I/O and conditional branching. Inspired by this, we propose a novel program semantics learning paradigm, that the model should learn from information composed of (1) the representations which align well with the fundamental operations in operational semantics, and (2) the information of environment transition, which is indispensable for program understanding. To validate our proposal, we present a hierarchical Transformer-based pre-training model called OSCAR to better facilitate the understanding of programs. OSCAR learns from intermediate representation (IR) and an encoded representation derived from static analysis, which are used for representing the fundamental operations and approximating the environment transitions respectively. OSCAR empirically shows the outstanding capability of program semantics understanding on many practical software engineering tasks. Code and models are released at: \url{https://github.com/pdlan/OSCAR}.}
+}
+
+@misc{Shadertoy,
+  author = {Inigo Quilez and Pol Jeremias},
+  title = {Shadertoy BETA},
+  howpublished = {\url{https://www.shadertoy.com/}},
+  note = {Accessed: 2024-01-01},
+  year = {2013},
+  month = {Jul},
+}
+
+d@misc{AMDRGP,
+  author = {AMD},
+  title = {Radeon Graphics Profiler},
+  howpublished = {\url{https://gpuopen.com/rgp/}},
+  note = {Accessed: 2024-01-01},
+  year = {2023},
+  month = {Dec},
+}
+
+@misc{NSightGraphics,
+  author = {{NVIDIA}},
+  title = {NVIDIA Nsight Graphics},
+  howpublished = {\url{https://developer.nvidia.com/nsight-graphics}},
+  note = {Accessed: 2024-01-01},
+  year = {2023},
+  month = {Dec},
+}
+
+@misc{SPIRV,
+  author = {{Khronos Group}},
+  title = {SPIR-V Specification},
+  howpublished = {\url{https://registry.khronos.org/SPIR-V/specs/unified1/SPIRV.html}},
+  note = {Accessed: 2024-01-01},
+  year = {2023}
+}
+
+@misc{glslang,
+  author = {{Khronos Group}},
+  title = {glslang},
+  howpublished = {\url{https://github.com/KhronosGroup/glslang}},
+  note = {Accessed: 2024-01-01},
+  year = {2023}
+}
+
+@misc{SPIRVTools,
+  author = {{Khronos Group}},
+  title = {SPIRV-Tools},
+  howpublished = {\url{https://github.com/KhronosGroup/SPIRV-Tools}},
+  note = {Accessed: 2024-01-01},
+  year = {2023}
+}
+
+@misc{3DMARK,
+  author = {{UL Solutions}},
+  title = {3DMark Benchmark},
+  howpublished = {\url{https://benchmarks.ul.com/3dmark}},
+  note = {Accessed: 2024-01-01},
+  year = {2023}
+}
+
+@misc{UNIGINE,
+  author = {{UNIGINE Company}},
+  title = {UNIGINE Benchmark},
+  howpublished = {\url{https://benchmark.unigine.com/}},
+  note = {Accessed: 2024-01-01},
+  year = {2023}
+}
+
+@article{10.1112/plms/s2-42.1.230,
+    author = {Turing, A. M.},
+    title = "{On Computable Numbers, with an Application to the Entscheidungsproblem}",
+    journal = {Proceedings of the London Mathematical Society},
+    volume = {s2-42},
+    number = {1},
+    pages = {230-265},
+    year = {1937},
+    month = {01},
+    issn = {0024-6115},
+    doi = {10.1112/plms/s2-42.1.230},
+    url = {https://doi.org/10.1112/plms/s2-42.1.230},
+    eprint = {https://academic.oup.com/plms/article-pdf/s2-42/1/230/4317544/s2-42-1-230.pdf},
+}
+
+@misc{Talvos,
+  title = {Talvos: A dynamic-analysis framework and debugger for Vulkan/SPIR-V programs},
+  howpublished = {\url{https://github.com/talvos/talvos}},
+  note = {Accessed: 2024-01-01},
+  year = {2019}
+}
+
+@inproceedings{sennrich-etal-2016-neural,
+    title = "Neural Machine Translation of Rare Words with Subword Units",
+    author = "Sennrich, Rico  and
+      Haddow, Barry  and
+      Birch, Alexandra",
+    editor = "Erk, Katrin  and
+      Smith, Noah A.",
+    booktitle = "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+    month = aug,
+    year = "2016",
+    address = "Berlin, Germany",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/P16-1162",
+    doi = "10.18653/v1/P16-1162",
+    pages = "1715--1725",
+}
+
+@inproceedings{kudo-richardson-2018-sentencepiece,
+    title = "{S}entence{P}iece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing",
+    author = "Kudo, Taku  and
+      Richardson, John",
+    editor = "Blanco, Eduardo  and
+      Lu, Wei",
+    booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = nov,
+    year = "2018",
+    address = "Brussels, Belgium",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/D18-2012",
+    doi = "10.18653/v1/D18-2012",
+    pages = "66--71",
+    abstract = "This paper describes SentencePiece, a language-independent subword tokenizer and detokenizer designed for Neural-based text processing, including Neural Machine Translation. It provides open-source C++ and Python implementations for subword units. While existing subword segmentation tools assume that the input is pre-tokenized into word sequences, SentencePiece can train subword models directly from raw sentences, which allows us to make a purely end-to-end and language independent system. We perform a validation experiment of NMT on English-Japanese machine translation, and find that it is possible to achieve comparable accuracy to direct subword training from raw sentences. We also compare the performance of subword training and segmentation with various configurations. SentencePiece is available under the Apache 2 license at \url{https://github.com/google/sentencepiece}.",
+}
+
+@misc{Niu2023fair,
+              title={FAIR: Flow Type-Aware Pre-Training of Compiler Intermediate
+Representations},
+              author={Changan Niu and Chuanyi Li},
+              year={2023},
+              month={8},
+              eprint={2309.04828},
+              archivePrefix={arXiv},
+              primaryClass={cs.SE}
+          }
