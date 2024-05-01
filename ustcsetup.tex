@@ -1,0 +1,204 @@
+% !TeX root = ./main.tex
+
+\ifthenelse{\boolean{BlindReview}}{
+  % True for blind review
+  \ustcsetup{
+  title              = {数据驱动的着色器程序性能预测方法},
+  title*             = {Data-driven shader program performance prediction},
+  author             = {},
+  author*            = {},
+  speciality         = {计算机技术},
+  speciality*        = {Computer Technology},
+  supervisor         = {},
+  supervisor*        = {},
+  % date               = {2017-05-01},  % 默认为今日
+  % professional-type  = {专业学位类型},
+  % professional-type* = {Professional degree type},
+  % department         = {数学科学学院},  % 院系，本科生需要填写
+  % student-id         = {PB11001000},  % 学号，本科生需要填写
+  % secret-level       = {秘密},     % 绝密|机密|秘密|控阅，注释本行则公开
+  % secret-level*      = {Secret},  % Top secret | Highly secret | Secret
+  % secret-year        = {10},      % 保密/控阅期限
+  % reviewer           = true,      % 声明页显示“评审专家签名”
+  %
+  % 数学字体
+  % math-style         = GB,  % 可选：GB, TeX, ISO
+  math-font          = xits,  % 可选：stix, xits, libertinus
+  }
+}{%
+  \ustcsetup{
+  title              = {数据驱动的着色器程序性能预测方法},
+  title*             = {Data-driven shader program performance prediction},
+  author             = {刘紫檀},
+  author*            = {Liu Zitan},
+  speciality         = {计算机技术},
+  speciality*        = {Computer Technology},
+  supervisor         = {陈发来教授, 刘利刚教授},
+  supervisor*        = {Prof. Falai Chen, Prof. Ligang Liu},
+  % date               = {2017-05-01},  % 默认为今日
+  % professional-type  = {专业学位类型},
+  % professional-type* = {Professional degree type},
+  % department         = {数学科学学院},  % 院系，本科生需要填写
+  % student-id         = {PB11001000},  % 学号，本科生需要填写
+  % secret-level       = {秘密},     % 绝密|机密|秘密|控阅，注释本行则公开
+  % secret-level*      = {Secret},  % Top secret | Highly secret | Secret
+  % secret-year        = {10},      % 保密/控阅期限
+  % reviewer           = true,      % 声明页显示“评审专家签名”
+  %
+  % 数学字体
+  % math-style         = GB,  % 可选：GB, TeX, ISO
+  math-font          = xits,  % 可选：stix, xits, libertinus
+  }
+}
+
+
+
+\usepackage{tikz}
+% \usetikzlibrary{positioning}
+\usetikzlibrary{matrix, shapes.geometric, arrows.meta, positioning}
+
+% 定理类环境宏包
+\usepackage{amsthm}
+
+% 插图
+\usepackage{graphicx}
+
+% 三线表
+\usepackage{booktabs}
+
+% 跨页表格
+\usepackage{longtable}
+
+% 算法
+\usepackage[ruled,linesnumbered]{algorithm2e}
+
+\usepackage{subcaption} % 引入 subfigure 宏包
+
+% SI 量和单位
+\usepackage{siunitx}
+
+% 参考文献使用 BibTeX + natbib 宏包
+% 顺序编码制
+\usepackage[sort]{natbib}
+\bibliographystyle{ustcthesis-numerical}
+\newcommand\bibetal{等}
+\newcommand\biband{和}
+
+% for wingdings font
+\usepackage{pifont}
+
+% 加载宏包
+
+% 著者-出版年制
+% \usepackage{natbib}
+% \bibliographystyle{ustcthesis-authoryear}
+
+% 本科生参考文献的著录格式
+% \usepackage[sort]{natbib}
+% \bibliographystyle{ustcthesis-bachelor}
+
+% 参考文献使用 BibLaTeX 宏包
+% \usepackage[style=ustcthesis-numeric]{biblatex}
+% \usepackage[bibstyle=ustcthesis-numeric,citestyle=ustcthesis-inline]{biblatex}
+% \usepackage[style=ustcthesis-authoryear]{biblatex}
+% \usepackage[style=ustcthesis-bachelor]{biblatex}
+% 声明 BibLaTeX 的数据库
+% \addbibresource{bib/ustc.bib}
+
+% 配置图片的默认目录
+\graphicspath{{figures/}}
+
+% 数学命令
+\makeatletter
+\newcommand\dif{%  % 微分符号
+  \mathop{}\!%
+  \ifustc@math@style@TeX
+    d%
+  \else
+    \mathrm{d}%
+  \fi
+}
+\makeatother
+\newcommand\eu{{\symup{e}}}
+\newcommand\iu{{\symup{i}}}
+
+% 用于写文档的命令
+\DeclareRobustCommand\cs[1]{\texttt{\char`\\#1}}
+\DeclareRobustCommand\env{\texttt}
+\DeclareRobustCommand\pkg{\textsf}
+\DeclareRobustCommand\file{\nolinkurl}
+
+% hyperref 宏包在最后调用
+\usepackage{hyperref}
+
+
+\usepackage{multirow}
+\usepackage{makecell}
+
+% SPIRV-IR related
+\usepackage{listings}
+% SPIR-V IR
+
+% Define custom colors for listings
+\definecolor{commentcolor}{rgb}{0.0, 0.5, 0.0}
+% \definecolor{keywordcolor}{rgb}{0.0, 0.0, 1.0}
+\definecolor{identifiercolor}{rgb}{0.9, 0.2, 0.2}
+% \colorlet{commentcolor}{lime}
+\colorlet{keywordcolor}{blue}
+% \colorlet{identifiercolor}{black}
+
+% SPIR-V IR language definition for listings
+\lstdefinelanguage{spirvir}{
+  % ==> Don't know why, but the first and the last of this list won't get linted. Bug?
+  keywords={Op, OpLabel, OpAccessChain, OpAtomicIAdd, OpLoad, OpFOrdGreaterThanEqual, OpSelectionMerge, OpBranchConditional, OpCapability, OpDecorate, OpMemberDecorate, OpTypeInt, OpTypeRuntimeArray, OpTypeStruct, OpTypePointer, StorageBuffer, Block, DescriptorSet, Binding, Offset, ArrayStride, OpFunction, OpFunctionParameter, OpVariable, OpStore, OpFOrdLessThan, OpBranch, OpReturnValue, OpFunctionEnd, None}
+  morecomment=[l]{;},
+  morestring=[b]",
+  morecomment=[l];,%
+  keywordstyle=\color{keywordcolor}\bfseries,
+  identifierstyle=\color{identifiercolor},
+  commentstyle=\color{commentcolor},
+  stringstyle=\color{red},
+  sensitive=true  % keywords are case-sensitive
+}
+
+% General listings configuration
+\lstset{
+  language=spirvir,
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  captionpos=b,
+  showstringspaces=false,
+  frame=single
+}
+
+\lstdefinelanguage{GLSL}%
+{%
+	morekeywords={%
+	% HLSL constants
+		false,FALSE,NULL,true,TRUE,%
+	% GLSL predefinde macro constant
+		__LINE__,__FILE__,__VERSION__,GL_core_profile,GL_es_profile,GL_compatibility_profile,%
+	% GLSL precision modifier
+		precision,highp,mediump,lowp,%
+	% GLSL control keywords
+		break,case,continue,default,discard,do,else,for,if,return,switch,while,%
+	% GLSL types
+		void,bool,int,uint,float,double,vec2,vec3,vec4,dvec2,dvec3,dvec4,bvec2,bvec3,bvec4,ivec2,ivec3,ivec4,uvec2,uvec3,uvec4,mat2,mat3,mat4,mat2x2,mat2x3,mat2x4,mat3x2,mat3x3,mat3x4,mat4x2,mat4x3,mat4x4,dmat2,dmat3,dmat4,dmat2x2,dmat2x3,dmat2x4,dmat3x2,dmat3x3,dmat3x4,dmat4x2,dmat4x3,dmat4x4,sampler1D,sampler2D,sampler3D,image1D,image2D,image3D,samplerCube,imageCube,sampler2DRect,image2DRect,sampler1DArray,sampler2DArray,image1DArray,image2DArray,samplerBuffer,imageBuffer,sampler2DMS,image2DMS,sampler2DMSArray,image2DMSArray,samplerCubeArray,imageCubeArray,sampler1DShadow,sampler2DShadow,sampler2DRectShadow,sampler1DArrayShadow,sampler2DArrayShadow,samplerCubeShadow,samplerCubeArrayShadow,isampler1D,isampler2D,isampler3D,iimage1D,iimage2D,iimage3D,isamplerCube,iimageCube,isampler2DRect,iimage2DRect,isampler1DArray,isampler2DArray,iimage1DArray,iimage2DArray,isamplerBuffer,iimageBuffer,isampler2DMS,iimage2DMS,isampler2DMSArray,iimage2DMSArray,isamplerCubeArray,iimageCubeArray,atomic_uint,usampler1D,usampler2D,usampler3D,uimage1D,uimage2D,uimage3D,usamplerCube,uimageCube,usampler2DRect,uimage2DRect,usampler1DArray,usampler2DArray,uimage1DArray,uimage2DArray,usamplerBuffer,uimageBuffer,usampler2DMS,uimage2DMS,usampler2DMSArray,uimage2DMSArray,usamplerCubeArray,uimageCubeArray,struct,%
+	% GLSL support variables
+		gl_BackColor,gl_BackLightModelProduct,gl_BackLightProduct,gl_BackMaterial,gl_BackSecondaryColor,gl_ClipDistance,gl_ClipPlane,gl_ClipVertex,gl_Color,gl_DepthRange,gl_DepthRangeParameters,gl_EyePlaneQ,gl_EyePlaneR,gl_EyePlaneS,gl_EyePlaneT,gl_Fog,gl_FogCoord,gl_FogFragCoord,gl_FogParameters,gl_FragColor,gl_FragCoord,gl_FragData,gl_FragDepth,gl_FrontColor,gl_FrontFacing,gl_FrontLightModelProduct,gl_FrontLightProduct,gl_FrontMaterial,gl_FrontSecondaryColor,gl_InstanceID,gl_Layer,gl_LightModel,gl_LightModelParameters,gl_LightModelProducts,gl_LightProducts,gl_LightSource,gl_LightSourceParameters,gl_MaterialParameters,gl_ModelViewMatrix,gl_ModelViewMatrixInverse,gl_ModelViewMatrixInverseTranspose,gl_ModelViewMatrixTranspose,gl_ModelViewProjectionMatrix,gl_ModelViewProjectionMatrixInverse,gl_ModelViewProjectionMatrixInverseTranspose,gl_ModelViewProjectionMatrixTranspose,gl_MultiTexCoord0,gl_MultiTexCoord1,gl_MultiTexCoord2,gl_MultiTexCoord3,gl_MultiTexCoord4,gl_MultiTexCoord5,gl_MultiTexCoord6,gl_MultiTexCoord7,gl_Normal,gl_NormalMatrix,gl_NormalScale,gl_ObjectPlaneQ,gl_ObjectPlaneR,gl_ObjectPlaneS,gl_ObjectPlaneT,gl_Point,gl_PointCoord,gl_PointParameters,gl_PointSize,gl_Position,gl_PrimitiveIDIn,gl_ProjectionMatrix,gl_ProjectionMatrixInverse,gl_ProjectionMatrixInverseTranspose,gl_ProjectionMatrixTranspose,gl_SecondaryColor,gl_TexCoord,gl_TextureEnvColor,gl_TextureMatrix,gl_TextureMatrixInverse,gl_TextureMatrixInverseTranspose,gl_TextureMatrixTranspose,gl_Vertex,gl_VertexID,%
+	% GLSL support constants
+		gl_MaxClipPlanes,gl_MaxCombinedTextureImageUnits,gl_MaxDrawBuffers,gl_MaxFragmentUniformComponents,gl_MaxLights,gl_MaxTextureCoords,gl_MaxTextureImageUnits,gl_MaxTextureUnits,gl_MaxVaryingFloats,gl_MaxVertexAttribs,gl_MaxVertexTextureImageUnits,gl_MaxVertexUniformComponents,%
+	% GLSL support functions
+		abs,acos,all,any,asin,atan,ceil,clamp,cos,cross,degrees,dFdx,dFdy,distance,dot,equal,exp,exp2,faceforward,floor,fract,ftransform,fwidth,greaterThan,greaterThanEqual,inversesqrt,length,lessThan,lessThanEqual,log,log2,matrixCompMult,max,min,mix,mod,noise1,noise2,noise3,noise4,normalize,not,notEqual,outerProduct,pow,radians,reflect,refract,shadow1D,shadow1DLod,shadow1DProj,shadow1DProjLod,shadow2D,shadow2DLod,shadow2DProj,shadow2DProjLod,sign,sin,smoothstep,sqrt,step,tan,texture1D,texture1DLod,texture1DProj,texture1DProjLod,texture2D,texture2DLod,texture2DProj,texture2DProjLod,texture3D,texture3DLod,texture3DProj,texture3DProjLod,textureCube,textureCubeLod,transpose,%
+	% GLSL struct member -> FixMe: Should have dot(.) as delimiter
+		rgb
+	},
+	sensitive=true,%
+	morecomment=[s]{/*}{*/},%
+	morecomment=[l]//,%
+	morestring=[b]",%
+	morestring=[b]',%
+	moredelim=*[directive]\#,%
+	% keyword.control.hlsl
+	moredirectives={define,defined,elif,else,if,ifdef,endif,line,error,ifndef,include,pragma,undef,warning,extension,version}%
+}[keywords,comments,strings,directives]%
