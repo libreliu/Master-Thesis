@@ -2,15 +2,20 @@
 % !TeX program = xelatex
 % !TeX spellcheck = en_US
 
-\documentclass[degree=master,degree-type=professional]{ustcthesis}
+\documentclass[degree=master,degree-type=professional,language=chinese]{ustcthesis}
 % degree      = doctor | master | bachelor
 % degree-type = academic | professional
 % language    = chinese | english
 % fontset     = windows | mac | ubuntu | fandol
 
-% 加载宏包、全部的配置
-\input{ustcsetup.tex}
+% https://github.com/zepinglee/gbt7714-bibtex-style/issues/120
 
+\usepackage{ifthen}
+% 配置是否为盲审 - use before ustcsetup
+\newboolean{BlindReview}
+\setboolean{BlindReview}{true} % Set to 'true' or 'false'
+
+\input{ustcsetup.tex}
 
 \begin{document}
 
@@ -43,7 +48,13 @@
 % \input{chapters/complementary.tex}
 
 \backmatter
-\input{chapters/acknowledgements.tex}
+
+\ifthenelse{\boolean{BlindReview}}{
+  % No-op; won't include acks
+}{
+  % Not blind review; include the acks
+  \input{chapters/acknowledgements.tex}
+}
 \input{chapters/publications.tex}
 
 \end{document}

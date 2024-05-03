@@ -1,30 +1,37 @@
 % !TeX root = ../main.tex
 
 \ustcsetup{
-  keywords  = {学位论文, 摘要, 关键词},
-  keywords* = {dissertation, abstract, keywords},
+  keywords  = {着色器性能预测, 性能建模, GPU},
+  keywords* = {shader performance prediction, performance modeling, GPU},
 }
 
 \begin{abstract}
-  摘要分中文和英文两种，中文在前，英文在后，博士论文中文摘要一般 800～1500 个汉字，硕士论文中文摘要一般 500～1000 个汉字。
-  英文摘要的篇幅参照中文摘要。
+实时渲染技术是计算机图形学技术中的重要组成部分，而实时性是实时渲染永恒追求的主题。故而，在实时图形应用程序开发和优化中，对着色器程序执行时间进行建模和预测的能力至关重要。
 
-  关键词另起一行并隔行排列于摘要下方，左顶格，中文关键词间空一字或用分号“，”隔开，英文关键词之间用逗号“,”或分号“;”隔开。
+GPU 技术的蓬勃发展，让绝大多数实时渲染程序使用了基于可编程着色器的绘制流水线，并通过操作系统提供的图形 API 实现在不同 GPU 设备上的编程。然而，现有的着色器和绘制流水线性能估计方法却受到多种局限：其一，对于厂商提供的性能工具，其提供的性能估计方法通常依赖于厂商提供的、只能适用于自身平台的分析模型和性能计数器；其二，多数工具在着色器程序修改后，均需要重新访问待测平台，在其上进行测试；其三，部分性能分析方法中，只是对指令数量和种类进行简单求和，而没有考虑着色器指令之间上下文关系对性能的影响。
 
-  中文摘要是论文内容的总结概括，应简要说明论文的研究目的、基本研究内容、研究方法或过程、结果和结论，突出论文的创新之处。
-  摘要应具有独立性和自明性，即不用阅读全文，就能获得论文必要的信息。
-  摘要中不宜使用公式、图表，不引用文献。
+通过利用基于数据驱动的神经网络学习方法，本研究提出了 ShaderPerFormer，这是一种利用神经网络，针对不同 GPU 平台上图形管线中着色器的性能进行建模和预测的方法。相较于现有方法，本研究提出的方法可以更简便的应用到不同 GPU 平台上，并在逐着色器的粒度下提供端到端的性能预测。同时，通过利用神经网络的序列学习能力，GPU 架构特点和程序负载特征等和程序性能相关的因素也加入了考虑，在进一步提高预测准确度的同时使得使用过程中无需再访问待测平台。为了提供更准确的预测，本研究提出了一个单独的 SPIR-V 指令跟踪阶段，用于对着色器程序进行指令编排，并利用编排后着色器程序的运行结果来收集独立于平台的着色器程序跟踪信息，以获得逐 SPIR-V 指令运行计数。除此之外，本研究还提供了一个着色器程序性能数据集，其中包含在 5 个不同平台上总共 54667 个片段着色器性能样本，以用于着色器程序预测模型的训练。
 
-  中文关键词是为了文献标引工作从论文中选取出来用以表示全文主题内容信息的单词和术语，一般 3～8 个词，要求能够准确概括论文的核心内容。
+与先前着色器程序性能优化工作中提出的逐指令线性回归方法和简单启发式的两种基线方法相比，本研究的方法将五个平台的平均 MAPE 分别降低了 8.26\% 和 25.25\%，并在所有平台上拥有最佳的 Spearman 相关系数。消融实验显示，本研究提出的 SPIR-V 指令跟踪过程对预测性能的提升有显著的帮助。
+
+  % 摘要分中文和英文两种，中文在前，英文在后，博士论文中文摘要一般 800～1500 个汉字，硕士论文中文摘要一般 500～1000 个汉字。
+  % 英文摘要的篇幅参照中文摘要。
+
+  % 关键词另起一行并隔行排列于摘要下方，左顶格，中文关键词间空一字或用分号“，”隔开，英文关键词之间用逗号“,”或分号“;”隔开。
+
+  % 中文摘要是论文内容的总结概括，应简要说明论文的研究目的、基本研究内容、研究方法或过程、结果和结论，突出论文的创新之处。
+  % 摘要应具有独立性和自明性，即不用阅读全文，就能获得论文必要的信息。
+  % 摘要中不宜使用公式、图表，不引用文献。
+
+  % 中文关键词是为了文献标引工作从论文中选取出来用以表示全文主题内容信息的单词和术语，一般 3～8 个词，要求能够准确概括论文的核心内容。
 \end{abstract}
 
 \begin{abstract*}
-  This is a sample document of USTC thesis \LaTeX{} template for bachelor,
-  master and doctor. The template is created by zepinglee and seisman, which
-  orignate from the template created by ywg. The template meets the
-  equirements of USTC thesis writing standards.
+Real-time rendering technology is a crucial component of computer graphics, and real-time performance is an eternal pursuit in real-time rendering. Therefore, the ability to model and predict shader program execution time is essential in the development and optimization of real-time graphics applications.
 
-  This document will show the usage of basic commands provided by \LaTeX{} and
-  some features provided by the template. For more information, please refer to
-  the template document ustcthesis.pdf.
+The rapid development of GPU technology has led to the widespread use of programmable shader-based rendering pipelines in real-time rendering programs, which are implemented on different GPU devices through graphics APIs provided by operating systems. However, existing methods for estimating shader and rendering pipeline performance suffer from several limitations. Firstly, performance estimation methods provided by vendor-specific performance tools often rely on proprietary analysis models and performance counters that are only applicable to their own platforms. Secondly, most tools require re-accessing the target platform for testing after shader program modifications. Thirdly, some performance analysis methods simply sum up the number and types of instructions without considering the impact of contextual relationships between shader instructions on performance.
+
+By leveraging data-driven neural network learning methods, this paper proposes ShaderPerFormer, a neural network-based approach for modeling and predicting shader performance in graphics pipelines on different GPU platforms. Compared with existing methods, the proposed method can be easily applied to various GPU platforms and provides end-to-end performance prediction at the granularity of individual shaders. By utilizing the sequence learning capability of neural networks, factors related to program performance, such as GPU architecture characteristics and program workload features, are also considered, further improving prediction accuracy while eliminating the need to access the target platform during usage. To provide more accurate predictions, the method includes a separate SPIR-V instruction tracing stage for shader program instruction orchestration and collects platform-independent shader program tracing information using the execution results of the orchestrated shader programs to obtain per-SPIR-V instruction execution counts. In addition, this paper provides a shader program performance dataset containing a total of 54,667 fragment shader performance samples across five different platforms for training shader program prediction models.
+
+Compared to the per-instruction linear regression and simple heuristic baseline methods proposed in previous shader program performance optimization works, the method in this paper reduces the average MAPE by 8.26\% and 25.25\%, respectively, across the five platforms and achieves the best Spearman correlation coefficient on all platforms. Ablation experiments demonstrate that the proposed SPIR-V instruction tracing process significantly contributes to the improvement of prediction performance.
 \end{abstract*}

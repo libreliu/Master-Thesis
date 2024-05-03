@@ -64,7 +64,7 @@ FUNCTION {load.config}
   #4 'bibliography.et.al.min :=
   #3 'bibliography.et.al.use.first :=
   #1 'uppercase.name :=
-  #0 'terms.in.macro :=
+  #1 'terms.in.macro :=
   #0 'year.after.author :=
   #1 'period.after.author :=
   #0 'italic.book.title :=
