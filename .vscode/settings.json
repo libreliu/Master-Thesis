@@ -1,0 +1,25 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk ustcthesis (XeLaTeX)",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+        "name": "latexmk ustcthesis (XeLaTeX)",
+        "tools": [
+            "latexmk ustcthesis (XeLaTeX)"
+        ]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.autoBuild.run": "onSave"
+}
