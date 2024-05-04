@@ -6,14 +6,14 @@
 
 \section{引言}
 
-{\added 着色器程序是利用 GPU 进行实时渲染的过程中，嵌入到渲染流水线中的程序片段。由于性能对于游戏等实时渲染程序来说至关重要，故而了解着色器程序的性能对于程序的优化来说可以起到一定的帮助。对于数据驱动的着色器程序性能预测方法来说，高质量的着色器程序性能数据是其成功的关键。同时，不同类型的着色器程序可能在不同平台上体现不同的性能特征，这些行为也需要跨越不同平台的着色器性能数据集加以刻画。然而，构建这样的数据集面临着如下挑战。
+{\amend 着色器程序是利用 GPU 进行实时渲染的过程中，嵌入到渲染流水线中的程序片段。由于性能对于游戏等实时渲染程序来说至关重要，故而了解着色器程序的性能对于程序的优化来说可以起到一定的帮助。对于数据驱动的着色器程序性能预测方法来说，高质量的着色器程序性能数据是其成功的关键。同时，不同类型的着色器程序可能在不同平台上体现不同的性能特征，这些行为也需要跨越不同平台的着色器性能数据集加以刻画。然而，构建这样的数据集面临着如下挑战：
 
 {\bf 其一}，尚无用于着色器程序性能理解和学习的公开着色器性能数据集。经典的程序语言理解数据集，如其中包含 POJ-104 \cite{10.5555/3015812.3016002}、GitHub Java Corpus 等的 CodeXGLUE 数据集\cite{DBLP:journals/corr/abs-2102-04664}，更多关注于代码的通用语义理解，而对性能部分关注较少。GPU 上的数据集，如 OpenCL 异构映射任务数据集\cite{8091247}，则多只关注于通用计算方面，且程序的规模和丰富程度均需要进一步增强。
 
 % TODO: 如果第二章基础知识部分增加了相关的说明，可以挪动到这里。
-{\bf 其二}，着色器程序的性能受到多种波动的影响，而现有的程序理解数据集中，多只有简单的运行时间，缺乏对于运行时间的稳定度的分析。例如，面向机器学习的大规模程序理解数据集 CodeNet \cite{DBLP:journals/corr/abs-2105-12655} 中，关于程序性能的标注只有 CPU 运行时间和运行内存两项。对于 GPU 上运行的程序来说，整个计算过程经过的环节更多，所以运行时间的不确定性也会更强。
+{\bf 其二}，着色器程序的性能受到多种波动的影响，而现有的程序理解数据集中，多只有简单的运行时间，缺乏对于运行时间的稳定度的分析。例如，面向机器学习的大规模程序理解数据集 CodeNet \cite{DBLP:journals/corr/abs-2105-12655} 中，关于程序性能的标注只有 CPU 运行时间和运行内存两项。对于 GPU 上运行的程序来说，整个计算过程经过的环节更多，所以运行时间的不确定性也会更强。}
 
-{\bf 其三}，着色器程序实现的效果多种多样，而程序的类型对于后续的理解工作会起到一定作用。例如，仅仅在片段着色器程序中，程序开发者就可以实现图 \ref{fig:shadertoy_gallery_ch3} 中多样的画面效果。程序开发者通常会在代码内和平台上留有一定程度的作品标签信息，如本章使用的数据来源 Shadertoy 平台就提供向上传作品的属性信息中添加 tag 的功能。然而，许多上传的着色器程序，其标注并不完备。
+{\added{\bf 其三}，着色器程序实现的效果多种多样，而程序的类型对于后续的理解工作会起到一定作用。例如，仅仅在片段着色器程序中，程序开发者就可以实现图 \ref{fig:shadertoy_gallery_ch3} 中多样的画面效果。程序开发者通常会在代码内和平台上留有一定程度的作品标签信息，如本章使用的数据来源 Shadertoy 平台就提供向上传作品的属性信息中添加 tag 的功能。然而，许多上传的着色器程序，其标注并不完备。
 
 \begin{figure}[htbp]
   \centering
@@ -52,7 +52,7 @@
 \end{figure}
 
 
-本章提出的数据集将基本解决上述问题。针对问题一，本章所描述的方法构造了新的着色器性能数据集，其包含 5 个 GPU 平台，共 54667 个片段着色器性能样本。针对问题二，本章性能测量时使用了重复采样和 GPU 端时间戳测量，并在实验时对样本的变异系数进行了分析。针对问题三，本章探索了利用基座语言模型、结合人工进行半自动着色器类型标注的相关方法，为着色器数据集内的功能类型提供了参考。同时，本章提出的数据集将进一步给出在不同平台间有显著性能相对差异的着色器样本集合。并在实验部分给出数据集的质量评估。
+本章提出的数据集将基本解决上述问题。针对问题一，本章所描述的方法构造了新的着色器性能数据集，其包含 5 个 GPU 平台，共 54667 个片段着色器性能样本。针对问题二，本章性能测量时使用了重复采样和 GPU 端时间戳测量，并在实验时对样本的变异系数进行了分析。}{\added 针对问题三，本章探索了利用基座语言模型、结合人工进行半自动着色器类型标注的相关方法，为着色器数据集内的功能类型提供了参考。同时，本章提出的数据集将进一步给出在不同平台间有显著性能相对差异的着色器挑战样本集合。并在实验部分给出数据集的质量评估。
 }
 
 \section{着色器收集和性能测量}
@@ -61,7 +61,7 @@
 
 {\added 对于 GPU 上基于光栅化的图形渲染程序来说，其通常需要}指定管线的顶点和三角面索引输入，同时给出过程中用到的顶点、片元等着色器{\amend 以调用 GPU 进行绘制操作。}不过，出于降低上手门槛、让用户专注于创造新奇有趣的视觉效果本身的考虑，Shadertoy 平台上在进行显示绘制时，均{\amend 使用输入图元为覆盖全视口的两个三角形作为输入，且使用一个在顶点变换阶段原样输出的顶点着色器。}{\added 该着色器可以使用 WebGL Inspector \cite{WebGLInspector} 截出。}
 
-作为示例，一个简单的 Shadertoy 着色器如图 \ref{fig:example_glsl_shadertoy_code_ch3} 中代码所示，其渲染结果如图 \ref{fig:example_shadertoy_output} 所示。
+作为示例，一个简单的 Shadertoy 着色器如图 \ref{fig:example_glsl_shadertoy_code_ch3} 中代码所示，其渲染结果如图 \ref{fig:example_shadertoy_output_ch3} 所示。
 
 \begin{figure}  % 'h' for here, 't' for top, 'b' for bottom, 'p' for on a separate page
 \centering
@@ -90,11 +90,11 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   \label{fig:example_shadertoy_output_ch3}
 \end{figure}
 
-如图 \ref{fig:shadertoy_gallery_ch3}，尽管在渲染时缺乏多样的几何输入，{\amend Shadertoy 上的着色器程序}仍然可以通过应用如光线步进（Ray Marching）\cite{Hart1996}, 过程化内容生成（Procedural Content Generation）等技术来创建能够产生复杂视觉效果的着色器。Shadertoy 网站收集的着色器在渲染技术方面覆盖相当完备{\amend，GPU 负载情况变化多样}，故而{\amend 本章}以 Shadertoy 上的着色器为基础，构建片元着色器性能数据集。
+如图 \ref{fig:shadertoy_gallery_ch3}，尽管在渲染时缺乏多样的几何输入，{\amend Shadertoy 上的着色器程序}仍然可以通过应用如光线步进（Ray Marching）\cite{Hart1996}, 过程化内容生成（Procedural Content Generation）等技术来创建能够产生复杂视觉效果的着色器。Shadertoy 网站收集的着色器在渲染技术方面覆盖相当完备{\amend 负载情况变化多样}，故而{\amend 本章}以 Shadertoy 上的着色器为基础，构建片元着色器性能数据集。
 
 \subsection{数据收集}
 
-为了方便第三方程序的编写，Shadertoy 网站提供了基于 HTTP GET 的 API 接口，这为{\amend 数据集的}数据收集工作提供了一定便利。利用 Shadertoy API 进行数据收集的步骤大大致如下：
+为了方便第三方程序的编写，Shadertoy 网站提供了基于 HTTP GET 的 API 接口，这为{\amend 数据集构建过程中的}数据收集工作提供了一定便利。利用 Shadertoy API 进行数据收集的步骤大致如下：
 
 \begin{enumerate}
     \item 在 Shadertoy 网站上申请 API Key，从而得到 6 位的 API Key
@@ -102,36 +102,209 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     \item 对每个 ID，请求 API 以得到 JSON 格式存储的着色器
 \end{enumerate}
 
-{\added Shadertoy 为了功能的丰富，其在网站功能上加入了简单的多遍渲染（Multi-pass Rendering）功能。所谓多遍渲染，即为多次调用绘制流水线，每次采用不同的着色器程序输入和最终的输出对象，并在最后的绘制流水线调用中进行合成。然而，通常可以认为，着色器性能的刻画，主要可以参考一次绘制流水线调用的耗时。故而，需要对 Shadertoy 中的着色器进行过滤和筛选，以获得需要的单遍渲染使用的着色器程序。}
+{\amend Shadertoy 为了丰富其着色器的画面表现力，其在网站功能上加入了简单的多遍渲染（Multi-pass Rendering）功能。所谓多遍渲染，即为多次调用绘制流水线，每次采用不同的着色器程序输入和最终的输出对象，并在最后的绘制流水线调用中进行合成的一种渲染方式。然而，通常可以认为，着色器性能的刻画参考一次绘制流水线调用的耗时即可。故而，本章的数据收集工作中，需要对 Shadertoy 中的着色器进行过滤和筛选，以获得需要的单遍渲染使用的着色器程序。}
 
-Shadertoy 使用渲染通道（Render Pass）来刻画多遍渲染需要的信息。在其 JSON 格式存储的着色器的每个渲染通道内，存放有大致对应着一次绘制流水线绘制需要的纹理、Uniform 变量输入和着色器程序资源信息。同时，渲染通道之间的先后顺序为预先定义的顺序。基于对所爬取的着色器的观察，常见的渲染通道主要有 Image，Common 和 Buffer 三类。
+Shadertoy 使用渲染通道（Render Pass）来刻画多遍渲染需要的信息。在其 JSON 格式存储的着色器的每个渲染通道内，存放有大致对应着一次绘制流水线的绘制需要的纹理、Uniform 变量输入和着色器程序资源信息。同时，渲染通道之间的先后顺序为预先定义的顺序。基于对所爬取的着色器的观察，常见的渲染通道主要有 Image，Common 和 Buffer 三类。
 
 {\bf Image 通道}是负责输出最终显示内容的渲染通道，是必须存在的。多数 Shadertoy 着色器程序只拥有 Image 通道。{\bf Common 通道}不是真正的渲染通道，而是作为例程代码，插入到所有其他渲染通道的着色器中。其用于定义多个渲染通道共享的、可重复使用的函数例程，而不直接输出内容，也不是必须存在的。{\bf Buffer 通道}则是用于记录程序状态或构建复杂图像效果的中间渲染通道，输出对象是专门的图像缓冲。其通常存储和操作着色器程序的中间数据，不是必须存在的通道。
 
 对于 Shadertoy 的着色器程序来说，可以认为使用了 Buffer 通道的程序为多渲染通道程序，而只使用 Image 和 Common 通道的程序为单渲染通道程序。由于多渲染通道的程序可以认为是多个独立的单渲染通道程序的叠加，故而{\amend 数据集构建}时只着眼于处理单渲染通道的着色器程序。
 
-{\added 在收集和过滤好单渲染通道的 Shadertoy 着色器程序，并将 Image 和 Common 通道的着色器代码进行合并，后就得到了可以被第 \ref{sec:perf_data_generation} 节将提出的性能数据生成环节使用的着色器程序。}
+{\amend 在收集和过滤好单渲染通道的 Shadertoy 着色器程序，并将 Image 和 Common 通道的着色器代码进行合并后，就得到了可以被第 \ref{sec:perf_data_generation} 节提出的性能数据生成环节使用的着色器程序。}
 % Todo: 过滤后的信息可以参见实验部分的表
 
-\subsection{性能数据生成}
+\subsection{性能数据测量}
 \label{sec:perf_data_generation}
 
-% TODO: amend from here
+{\amend 针对数据集构建过程所需要的性能数据测量工作，本章编写了专门的测量程序。该程序框架上采用 Python，测量部分采用外挂 C++ 扩展的方式实现。在每次性能测量前，通过将着色器对象导入 C++ 扩展，并在扩展内创建相应的 Vulkan 上下文，设置合适的绘制流水线资源，以进行完成测量的准备工作。在测量时，采用算法 \ref{alg:profile_ch3} 中描述的过程来进行测量。测量结束后，保存到 SQLite 数据库中以备后续的处理。其中，测试程序设计上的若干要点如下：}
 
-Shadertoy 上的着色器程序运行时需要在每帧提供一些预先设置好的 Uniform 变量资源。这些 Uniform 变量作为输入，其本身可以以 GLSL 的匿名 Uniform 块的形式被源码所引用，且可以大致分为屏幕数据、用户输入、时间和其它通道输入采样四种类别。例如，图 \ref{fig:example_glsl_shadertoy_code} 就使用了 iResolution 和 iTime 两个 Uniform 变量。一些常用的 Uniform 输入包括：
-\begin{itemize}
-    \item iTime: 当前的渲染时间
-    \item iFrame: 当前渲染的帧编号
-    \item iResolution: 当前的屏幕分辨率
-    \item iMouse: 鼠标位置
-    \item iDate: 年月日和时间信息
-\end{itemize}
+\begin{algorithm}
+    \caption{性能测量例程伪代码}
+    \label{alg:profile_ch3}
+    
+    \SetAlgoLined % For setting line numbering
+    \SetKwFunction{FProfileShaderOnce}{ProfileShaderOnce}
+    \SetKwFunction{FProfileShader}{ProfileShader}
+    \SetKwProg{Fn}{Function}{:}{}
+    \SetKwArray{VecResults}{results}
+    
+    \Fn{\FProfileShaderOnce{num\_cycles}}{
+        执行图像内存屏障、布局转换并重置时间戳查询池\;
+        等待先前命令完成\;
+        cmdBuf \gets 从池中分配命令缓冲区()\;
+        在 cmdBuf 中录制写时间戳 $ts_1$ 命令\;
+        \For{i \gets 1 \textbf{to} num\_cycles}{
+            在 cmdBuf 中录制绑定图形管线和描述符命令\;
+            在 cmdBuf 中录制绘制命令\;
+        }
+        在 cmdBuf 中录制写时间戳 $ts_2$ 命令\;
+        提交至命令队列\;
+        等待先前命令完成\;
+        \Return $(ts_2 - ts_1) \times unitTs$\;
+    }
+    
+    \Fn{\FProfileShader{$num\_cycles$, $num\_trials$}}{
+        results \gets []\;
+        \For{i \gets 1 \textbf{to} num\_trials}{
+            results[i] \gets \FProfileShaderOnce{num\_cycles}\;
+        }
+        \Return results\;
+    }
+    
+\end{algorithm}
 
-许多 Shadertoy 程序对上述输入进行更改的情况下，会产生出不同的画面。同时，Shadertoy 着色器程序的入口点函数 mainImage 与通常的片元着色器入口点函数不同。在 Shadertoy 网站上，用户上传的编译器会被拼接为 WebGL 可以执行的 OpenGL ES 着色器程序，并由浏览器的 WebGL 实现运行。
+
+
+% TODO： write 相关工作
+{\amend{\bf 性能数据质量保证} 着色器的执行链条很长。一个典型的着色器程序需要首先被编入绘制流水线，然后由驱动程序生成绘制流水线状态对象（Pipeline State Object），再被用户态 GPU 驱动提交到内核态 GPU 驱动，进而被内核态 GPU 驱动提交到 GPU 的前端队列，最终由 GPU 上的相应管理核心向相应的命令处理单元提交命令，相应的命令处理单元按渲染流水线的顺序依次调用流水线的部件，装配图元并运行着色器程序。在这其中，不同部分的负载波动都有可能影响 GPU 性能测量的精确度，故而只测量一组执行时间是不可靠的。
+
+在性能测量部分的设计考虑中，{\bf 首先}选择采用现代的 Vulkan 图形 API，因其相对于编写简单的 OpenGL 来说，可以更好的控制命令提交的具体时间和同步行为，而不需要猜测绝大多数 OpenGL 驱动的隐式控制方法带来的同步和提交时间未知的问题。{\bf 其次}，在时间测量阶段，选择使用最贴近着色器程序本身耗时的 GPU 时间戳测量方式，从而尽量避免 CPU 提交对性能测量的影响。{\bf 同时}，算法 \ref{alg:profile_ch3} 中特别实现了录制 {num\_cycles} 绘制命令和重复 {num\_trials} 次实验的逻辑，其中前者是在 GPU 中连续的绘制，而后者则每次都是完整的实验，需要经历录制-提交-GPU 结果回读过程，以尽可能用重复动作稳定全链路的耗时。{num\_trials} 还会被后续的误差分析阶段使用，以确定收集的性能数据的波动符合测试本身的要求。
+
+{\bf Uniform 变量输入处理} 对于 Shadertoy 网站本身的着色器程序，其预期执行环境为浏览器标准中定义的 WebGL 运行时环境\cite{WebGL}。WebGL 所支持的着色器程序语言为 GLSL ES，其在转换为 Vulkan 的编译前端 glslang 使用的着色器程序语言 GLSL 时需要对输入的 Uniform 变量进行处理，因为 Vulkan 取消了对于独立 Uniform 变量的支持。对此，在构造 glslang 期待的着色器程序时，本章采用匿名 Uniform 块（Anonymous Uniform Block）的方式来处理 Uniform 输入。由于匿名 Uniform 块带来的结构体命名空间中命名溢出的效果，着色器程序的其余部分则不需要其它改动。
+
+{\bf 错误恢复} 性能测量过程中天然需要对不同着色器程序进行顺序的测量。然而，因为 Shadertoy 本身在用户上传着色器程序时，并不对着色器程序进行审查，故而在后续的测量过程中可能遇到两种问题：编译错误和运行超时。{\bf 编译错误}的处理方法和 CPU 程序遇到编译错误的处理方法别无二致，但{\bf 运行超时}在绘制流水线情景下同正常的 CPU 程序不同，其会由 GPU 的内核态驱动程序报告，并通知 GPU 的用户态驱动程序，进而导致整个测量程序的 Vulkan 上下文失效。为了处理这种失效，性能测量程序特别设计了母进程-工作进程的二级架构，而工作进程的上下文失效会被母进程识别，进而由母进程重新生成对应的测量工作进程，以进行后续着色器的测量工作。
+
+}
+
+{\amend 同时，在性能数据测量结束后，因为各种失效情况，从而需要额外对着色器性能样本进行清洗工作。这些行为主要来源于三个方面：测量程序不支持的着色器程序特性、着色器的 SRV 资源引用在驱动间的默认实现差异，以及不同平台上设备驱动的超时处理。
+
+本章构造的性能测量程序没有考虑部分 Shadertoy 着色器中除 iResolution、iTime 等 Uniform 变量外额外引用的 SRV 资源，该类资源主要为纹理采样器。此类程序在 glslang 链接阶段即告异常。着色器的 SRV 资源引用在驱动间的默认实现差异带来的问题则常见于一些较为短小的、“code-golf” 类型的 Shadertoy 着色器程序中。该类程序为了节省程序编写的字符数，体现程序编写者自身的技术，需要依赖经常是未初始化的变量的内容。然而，该类行为为未定义行为，且常常使得其它部分也无法运行，甚至引起如 mesa Radeon 显示卡驱动程序的 Vulkan 实现崩溃。不同平台上，着色器的运行速度可能产生显著的差异，而部分驱动程序的超时发生后，并不会向用户态程序报告失效情况，而是假装成功并继续执行。
+
+针对于上面三种情况，性能测量后会额外进行一些保守的过滤操作，以过滤由这些情况产生的、可能出现问题的样本。过滤主要依靠检测画面是否为纯黑纯白、以及由 GPU 时间戳报告的测量总时间两个信息来实现。
+}
+\section{挑战样本集构建}
+
+{\added 着色器性能收集和分析的过程中，在不同平台间可以体现出明显的相对性能差异的着色器程序应该受到更多关注。故而，在数据集的收集过程中，有必要同时构建有挑战性的着色器性能挑战样本集。
+
+着色器在不同平台上天然具有不同的性能，不同平台上着色器样本执行时间的均值和方差均随平台的改变而改变。故而，在构建挑战样本集时，本章选择使用一个着色器样本在给定平台上的性能相对于其它性能样本的相对排序，即其{\bf 阶}来实现。具体来说，给定 $m$ 个平台的测量数据后，定义着色器 $ s_i $ 的难度如下：
+
+$$
+\symup{Difficulty}(s_i) = \symup{Var}(\symup{ord}_1(s_i), ..., \symup{ord}_m(s_i))
+$$
+
+其中 $\symup{ord}_j(s_i)$ 表示着色器 $ s_i $ 在第 $j$ 个平台测量时间的阶，即测量的时间结果小于该着色器测量结果的着色器性能样本的个数。
+
+在为每个着色器都标注相应的难度值后，选择难度较大的前 30\% 样本，构建为挑战样本集。
+}
 
 \section{着色器类型标注}
 
+{\added 本章构建的着色器性能数据集，其着色器来源于 Shadertoy 上实现各种不同画面和渲染效果所构建的着色器程序。着色器的性能相关的特性可以通过上文提到的测量和难度刻画获得，但功能相关的特征却需要人工理解着色器的程序代码，甚至对较为困难的着色器程序需要通过结合着色器的输出一起进行推测。上述过程对于大规模分析是非常耗时的。为了使得着色器性能数据集更加完整，本节给出了使用基座语言模型（Foundation Model）结合人工进行迭代标注的数据标注方法实践。
+
+基座语言模型，又被称为大语言模型（Large Language Model，LLM），主要指拥有超大参数量，并通过在超大规模的多语言语料上进行自监督学习的一类通用语言模型。通过在大规模语料上的预训练，基座语言模型获得了在多种不同的语言理解的下游任务上进行少样本或零样本处理问题的能力。对着色器程序进行功能标记需要分类器本身对程序的语义有良好的理解能力，故而，本节选择使用基座语言模型结合人工进行着色器数据集的类型标注。
+
+使用基座语言模型本身同样面临着一些挑战。基座语言模型的输出和输入的提示词有较强的相关性，故而需要设计较好的提示词以增强模型的表现。同时，基座语言模型的输出通常为自然语言文本，且部分模型的格式化输出对齐能力较弱，且使用非开源模型进行推理时常常不能使用选择采样技术，故而在检测输出上有一定困难。本节对上面的问题进行了一定程度的探索。
+
+本节采用的为着色器性能数据集进行类型标注的过程，其主要分为三个阶段：{\bf 类别划分}，{\bf 监督样本标注}和{\bf 大模型提示词迭代}。
+
+{\bf 类别划分} Shadertoy 网站的着色器程序包罗万象，故而设计标签时需要考虑到标签是否足够通用，同时分类效果是否适当。Shadertoy 的着色器在用户提交时，会被网站要求最少标记一个标签，然而用户通常不会提交符合该着色器类别的全部标签。故而，在类别划分阶段，首先统计 Shadertoy 网站标签中的前 200 个标签，并在其中抽象出适合的公共大类，每个公共大类都包含一些用户提交标签。用户提交标签和大类的对应关系是尽量保守的。因为，Shadertoy 的标签是程序编写者自己标记的，通常具有较高的可信度，故而其可以认为是精确度极高但可能缺漏的标签。通过保守的转换，可以直接给部分 Shadertoy 着色器进行大类的预标记。
+
+{\bf 监督样本标注} 为了调整基座语言模型的提示词，并对着色器性能类别有较为直观的认识，该阶段会随机抽样给定数量的着色器，并请使用学习图形学的领域内人士进行公共大类的属性标注。为了便于标注工作的进行，该阶段构建了简单的 Flask 网站，可供多名标注人员访问。
+
+{\bf 大模型提示词迭代} 在监督样本之外的样本，需要通过大模型给出其大类的分类。在这个过程中，需要向大模型本身提供待标记的着色器程序，输入输出格式提示词，以及每个类别的提示词。在这其中，每个类别的提示词对于最后的分类效果具有一定程度的影响。此阶段将在已经标注的监督样本上，由了解图形学的分类人员手工进行提示词的优化，并且通过监督样本上的分类表现来评估优化后的提示词对于监督样本的影响。
+
+}
 
 \section{实验和分析}
 
 
+
+\subsection{着色器性能数据}
+
+{\amend 利用前述的数据收集和测量方法，并}固定着色器的 Uniform 输入值 iTime 和 iFrame 为 1，本章在 5 种不同的 GPU 平台上收集了着色器性能样本。这些平台涵盖了多种不同的架构、厂商和 GPU 形态，包括桌面端和移动端显卡、独立和集成显卡。详细的环境信息可以参见表 \ref{table:envInfo_ch3}。
+
+\begin{table}[h]
+    \centering
+    \caption{测试的 GPU 平台的全名和类型一览}
+    \label{table:envInfo_ch3}
+    \begin{tabular}{llll}
+    \toprule
+        \textbf{缩写} & \textbf{全名} & \textbf{厂商} & \textbf{类型} \\ 
+    \midrule
+        RTX3060 & NVIDIA GeForce RTX 3060 & NVIDIA & 桌面端独立显卡 \\ 
+        UHD630 & Intel UHD Graphics 630 (CML GT2) & Intel & 桌面端集成显卡 \\ 
+        RTX4060 & NVIDIA GeForce RTX 4060 Laptop GPU & NVIDIA & 移动端独立显卡 \\ 
+        GTX1660Ti & NVIDIA GeForce GTX 1660 Ti & NVIDIA & 移动端独立显卡 \\ 
+        RX7900GRE & AMD Radeon RX 7900 GRE & AMD & 桌面端独立显卡 \\ 
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+{\amend 第 \ref{sec:perf_data_generation} 节同时提到，由于性能测量的各种失效情况，需要对测得的数据进行过滤操作。过滤后剩余的着色器性能样本数量可以参考表 \ref{table:datasetFilters_ch3}。}
+  
+\begin{table}[h]
+      \centering
+      \caption{在各个过滤阶段过后剩余的着色器性能样本数量一览}
+      \label{table:datasetFilters_ch3}
+      % \resizebox{\columnwidth}{!}{
+      \begin{tabular}{l|ccccc}
+      \toprule
+          \textbf{过滤器}  & RTX3060 & RX7900GRE & UHD630 & RTX4060 & GTX1660Ti \\
+      \midrule
+          Shadertoy 着色器        & \multicolumn{5}{c}{27911} \\ 
+          单渲染通道着色器        & \multicolumn{5}{c}{20669} \\ 
+          运行成功           & 13871  & 14084  & 13856 & 14094 & 13913 \\ 
+          追踪成功         & 13870  & 14080  & 13850 & 14090 & 13913 \\ 
+          非纯黑纯白       & 13376  & 13925  & 13364 & 13484 & 13379 \\ 
+          在词元长度限制内 & 10794  & 11360  & 10784 & 10935 & 10806 \\ 
+          在时间限制内         & 10794  & 11360  & 10781 & 10935 & 10797 \\
+      \bottomrule
+      \end{tabular}
+      \note{注：\textit{非纯黑纯白}和\textit{在时间限制内}用来过滤可能有 bug 的着色器。 \textit{在词元长度限制内} 用来过滤过长的着色器。}
+      % }
+\end{table}
+
+{\amend 同时，}从收集到的性能样本中可以观察到，不同平台上着色器的性能关系并非简单的线性关系所能刻画的。图 \ref{fig:archTimeMean_ch3} 展示了各个不同 GPU 平台上，性能样本相对于其运行时间的小提琴分布图。从分布图中可以得出，平台间的分布形状都有或多或少的差异，而这种差异在 UHD630 平台上尤其显著。在 UHD630 平台上，由分布整体靠右可以得到，该平台平均性能较其它平台更低，且由分布形状可知其性能样本的分布特点也与其它 GPU 平台显著不同。故而从一般意义上来说，使用其它平台上的着色器执行时间的进行简单的按比例线性缩放，来估计某个平台上的时间是存在困难的。{\added 着色器性能挑战样本集中的图 \ref{fig:difficultSamples_ch3} 则进一步证明了这样的结论。}
+
+在收集性能样本时，算法 \ref{alg:profile_ch3} 中设计了相应的重复测量环节，以确保收集到的数据足够精确。经过探索，本章在数据集收集过程中，其算法中的 {num\_cycles} 和 {num\_trials} 分别取 30 和 10。{\amend 同时，}通过额外检查每个着色器的 10 次测量的计算出的变异系数（Coefficient of Variation，CV），{\amend 可以证实本节}收集的性能数据具有足够的精度。变异系数 $ \symup{CV} $ 的定义为
+$$
+\symup{CV} = \frac{\sigma}{\mu},
+$$
+即测量值构成的序列的标准偏差与其平均值的比率，其能够比较有效的刻画利用前述方法收集到的性能样本的相对精度。图 \ref{fig:archTimeCV_ch3} 提供了所有测量平台的变异系数，从中可以得出结论，本{\amend 章}测量的大多数平台的变异系数小于$3\%$。该变异系数的上界所对应的精度，可以满足对于后续的使用和分析的需要。{\amend 故而，收集到的着色器性能样本是较为精确的。}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/TimeMean.pdf}
+    \caption{各 GPU 平台上性能样本关于时间的分布}
+    \label{fig:archTimeMean_ch3}
+  \end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/CV.pdf}
+    \caption{各 GPU 平台上性能样本计算得到的变异系数分布}
+    \label{fig:archTimeCV_ch3}
+\end{figure}
+
+\subsection{着色器性能挑战样本集}
+
+{\added 图 \ref{fig:difficultSamples_ch3} 给出了着色器数据集中筛选出的挑战样本中随机抽样的 10 个样本，其在时间分布图上的关系。图中的红色线条代表其阶（或称序数）由图上方表示的平台到图下方表示的平台为上升趋势，绿色线条代表其阶由图上方表示的平台到图下方表示的平台为下降趋势。从图中可以同时看到，部分样本之间代表的线条出现了显著的交叉，这些交叉刻画了挑战样本的一类典型特征：在平台 A 上较另一着色器快的着色器，其在平台 B 上反而可能较慢。}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/difficult.pdf}
+    \caption{着色器性能挑战样本集抽样展示}
+    \label{fig:difficultSamples_ch3}
+  \end{figure}
+
+\subsection{着色器类型标注}
+
+\begin{table}[h]
+    \centering
+    \caption{Shadertoy 经过类别划分后的公共大类和用户提交标签汇总}
+    \label{table:tag_classification}
+    \begin{tabular}{p{2cm}|p{11cm}}
+        \toprule
+        标签 & Shadertoy 子标签 \\
+        \midrule
+        2d & 2d \\
+        3d & 4d, 3d \\
+        raytracing & path, intersection, pathtracer, pathtracing, marching, raytrace, sdf, raytracing, raymarching, distancefield, distance, raymarcher, raymarch \\
+        volume & volume, volumetric \\
+        noise & perlin, bluenoise, noise, simplex, worley, fbm \\
+        simulation & cellularautomata, reaction, particles, gameoflife, physics, diffusion, cellular, flow, simulation, automata, dynamics, fluid \\
+        material & refraction, reflection, translucent, metal, mirror, water, transparency, glass, material, pbr, plastic \\
+        effects & effect, feedback, blur, grain, convolution, distortion, dithering, dof, vignette, glitch, aberration, warp, bloom, postprocessing, glow, filter \\
+        \bottomrule
+    \end{tabular}
+\end{table}
