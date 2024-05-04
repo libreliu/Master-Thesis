@@ -17,6 +17,17 @@
 
 \input{ustcsetup.tex}
 
+% \newcommand{\amend}{\color{red}}
+% \newcommand{\added}{\color{blue}}
+
+\ifthenelse{\boolean{BlindReview}}
+    {\newcommand{\amend}{\color{red}}}
+    {\newcommand{\amend}{}}
+  
+\ifthenelse{\boolean{BlindReview}}
+    {\newcommand{\added}{\color{blue}}}
+    {\newcommand{\added}{}}
+
 \begin{document}
 
 \maketitle
@@ -36,6 +47,7 @@
 % \input{chapters/citations.tex}
 \input{chapters/1_Intro}
 \input{chapters/2_RelatedWork}
+\input{chapters/2_5_Dataset}
 \input{chapters/3_ShaderPerformer}
 \input{chapters/4_Conclusion}
 
