@@ -1,0 +1,86 @@
+% !TeX root = ../main.tex
+
+\chapter{补充材料}
+
+
+\section{利用基座语言模型进行着色器类型标注时使用的提示词}
+\label{sec:prompt_appendix}
+
+使用基座语言模型进行着色器类型标注时，提示词的选择对标注的性能存在一定影响。本文主要探索了三种形式的基座语言模型提示词，分别为 \ref{lst:noPromptPrompt} 的无具体类别提示的提示词，\ref{lst:simplePromptPrompt} 的有简单类别提示的基座语言模型提示词，以及 \ref{lst:detailedPromptPrompt} 的有详细类别提示的基座语言模型提示词。
+
+\lstdefinestyle{plaintext}{
+  language={},  % Resetting the language to prevent keyword styling
+  basicstyle=\ttfamily\small,
+  keywordstyle=\ttfamily\small,
+  identifierstyle=\ttfamily\small,
+  commentstyle=\ttfamily\small,
+  stringstyle=\ttfamily\small,
+  showstringspaces=false,
+  breaklines=true,
+  %frame=none,
+  numbers=none
+}
+
+\begin{lstlisting}[style=plaintext, caption={无类别提示的基座语言模型提示词}, label=lst:noPromptPrompt]
+You are a computer graphics specialist, and you are tasked to classify the following shaders.
+
+The shader is as follows:
+```
+<shader>
+    <pass type="image">
+        此处填充着色器内容
+    </pass>
+    如果有其它渲染通道，此处将继续以 pass 标签的方式填充
+</shader>
+You MUST first explain your reason for your choice, then respond with xml format wrapped in a Markdown code block. The root element of the XML is result, and each tag is a tag element with a name attribute.
+For example, here is an example code block for a shader labeled "2d" and "raytracing":
+```
+<result>
+    <tag name="2d" />
+    <tag name="raytracing" />
+</result>
+```
+You have access to the following class tags:
+- 2d
+- 3d
+- raytracing
+- volume
+- noise
+- simulation
+- material
+- effects
+Please FIRST give deductions step by step, and THEN give your answer. Your answer should be conservative.
+\end{lstlisting}
+
+\begin{lstlisting}[style=plaintext, caption={有简单类别提示的基座语言模型提示词}, label=lst:simplePromptPrompt]
+（上面部分与无类别提示的基座语言模型提示词完全相同，省略）
+
+You have access to the following class tags:
+- 2d (Explaination: No 3D rendering techniques are involved in producing this image.)
+- 3d (Explaination: 3D rendering techniques are used in producing this image.)
+- raytracing (Explaination: Ray tracing (including ray marching) techniques are used in generating the intermediate or final image results in this shader.)
+- volume (Explaination: Volumetric rendering techniques are used in generating this shader, or the generated effect are of volumetric.)
+- noise (Explaination: Noise functions are used in generating the output or intermediate results of this shader. Including Fractal Brownian Motion (FBM), perlin, worley, simplex, blue noise and other noise functions.)
+- simulation (Explaination: Simulation techniques are used in generating the output or intermediate results of this shader. Including fluld, diffusion, particle, dynamics or reaction simulations and automata, game-of-life simulations.)
+- material (Explaination: Complex materials are present in the shader. This includes water, glass, metal, plastic and translucent materials, reflection and refraction behaviours, and PBR material models.)
+- effects (Explaination: Postprocessing effects are used in the shader. This includes bloom, distortion, glitch, glow, blur, warp, dithering, filtering and other effects.)
+
+Please FIRST give deductions step by step, and THEN give your answer. Your answer should be conservative.
+\end{lstlisting}
+
+    
+\begin{lstlisting}[style=plaintext, caption={有详细类别提示的基座语言模型提示词}, label=lst:detailedPromptPrompt]
+（上面部分与无类别提示的基座语言模型提示词完全相同，省略）
+
+You have access to the following class tags:
+- 2d (Explaination: No 3D rendering techniques are involved in producing this image.)
+- 3d (Explaination: 3D rendering techniques are used in producing this image.)
+- raytracing (Explaination: Ray tracing (including ray marching) techniques are used in generating the intermediate or final image results in this shader.)
+- volume (Explaination: Volumetric rendering techniques are used in generating this shader, or the generated effect are of volumetric.)
+- noise (Explaination: Noise functions are used in generating the output or intermediate results of this shader. Including Fractal Brownian Motion (FBM), perlin, worley, simplex, blue noise and other noise functions. However, the noise function should be non-trivial to implement.)
+- simulation (Explaination: Simulation techniques are used in generating the output or intermediate results of this shader. Including fluld, diffusion, particle, dynamics or reaction simulations and automata, game-of-life simulations.)
+- material (Explaination: Complex materials are present in the shader. This includes water, glass, metal, plastic and translucent materials, reflection and refraction behaviours, and PBR material models. However, Phong materials and pure lambertian reflections are generally not considered to be part of this class.)
+- effects (Explaination: Postprocessing effects are used in the shader. This includes bloom, distortion, glitch, glow, blur, warp, dithering, filtering. However, simple effects like diffuse lighting, simple blur, or simple sharpening will not count.)
+
+Please FIRST give deductions step by step, and THEN give your answer. Your answer should be conservative.
+\end{lstlisting}
