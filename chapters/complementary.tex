@@ -6,7 +6,7 @@
 \section{利用基座语言模型进行着色器类型标注时使用的提示词}
 \label{sec:prompt_appendix}
 
-使用基座语言模型进行着色器类型标注时，提示词的选择对标注的性能存在一定影响。本文主要探索了三种形式的基座语言模型提示词，分别为 \ref{lst:noPromptPrompt} 的无具体类别提示的提示词，\ref{lst:simplePromptPrompt} 的有简单类别提示的基座语言模型提示词，以及 \ref{lst:detailedPromptPrompt} 的有详细类别提示的基座语言模型提示词。
+{\added 使用基座语言模型进行着色器类型标注时，提示词的选择对标注的性能存在一定影响。本文主要探索了三种形式的基座语言模型提示词，分别为 \ref{lst:noPromptPrompt} 的无具体类别提示的提示词，\ref{lst:simplePromptPrompt} 的有简单类别提示的基座语言模型提示词，以及 \ref{lst:detailedPromptPrompt} 的有详细类别提示的基座语言模型提示词。}
 
 \lstdefinestyle{plaintext}{
   language={},  % Resetting the language to prevent keyword styling
@@ -84,3 +84,54 @@ You have access to the following class tags:
 
 Please FIRST give deductions step by step, and THEN give your answer. Your answer should be conservative.
 \end{lstlisting}
+
+\section{SPIR-V 分词实现}
+
+算法 \ref{alg:tokenizer} 展示了 SPIR-V 的分词过程。其中，TokenizeModule 函数在输出一个 \verb|[BOS]| 词元后，会获得该 SPIR-V 模块的入口函数和其引用的所有函数，并且将其顺序排列；之后，对于每个函数中的每条指令，TokenizeInst 会将其进行分词，并利用 PushToken 函数顺序输出词元。对于字符串、整数和浮点数字面值，分词器统一采用转换为字符串、增加 offset 进行原样输出的方法进行分词。
+
+\begin{algorithm}
+    % \SetAlgoLined %显示end
+	\caption{SPIR-V 分词例程伪代码}%算法名字
+    \label{alg:tokenizer}
+\SetKwFunction{FTokenizeInst}{TokenizeInst}
+\SetKwFunction{FTokenizeModule}{TokenizeModule}
+\SetKwFunction{FTokenizeStringLiteral}{TokenizeStringLiteral}
+\SetKwFunction{FPushToken}{PushToken}
+\SetKwProg{Fn}{Function}{:}{}
+
+
+\Fn{\FTokenizeStringLiteral{str}}{
+    \ForEach{ch $\in$ str}{
+        \tcc{PushToken($tok$) 用来输出一个词元 $tok$}
+        \FPushToken{SymbolOffsets::ByteEncodedLiteralBegin + ch};
+    }
+}
+
+\Fn{\FTokenizeInst{spirv\_inst}}{
+    \FPushToken{SymbolOffsets::OpCodeBegin + spirv\_inst.opcode()}
+
+    \ForEach{operand $\in$ spirv\_inst}{
+        \uIf{isIdType(operand)}{
+            \FPushToken{SymbolOffsets::IdBegin + operand.AsId()}\;
+        }
+        \uElseIf{isStringLiteral(operand)}{
+            \FTokenizeStringLiteral{operand.AsString()}\;
+        }
+        \uElseIf{isIntegerLiteral(operand) or isFPLiteral(operand)}{
+            \FTokenizeStringLiteral{to\_string(operand.AsNum())}\;
+        }
+    }
+}
+
+\Fn{\FTokenizeModule{spirv\_module}}{
+    \tcc{首先输出一个 [BOS] 词元，[BOS] 词元在特殊符号中编号为 1}
+    \FPushToken{SymbolOffsets::SpecialSymbolBegin + 1}\;
+    \tcc{获得入口函数及其引用的所有函数的列表}
+    funcs \gets spirv\_module.collectCallTreeFromRoots()\;
+    \ForEach{f $\in$ funcs}{
+        \ForEach{inst $\in$ f}{
+            \FTokenizeInst{inst};
+        }
+    }
+}
+\end{algorithm}
