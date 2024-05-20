@@ -67,7 +67,7 @@
 
 \begin{figure}
     \centering
-    \includegraphics[page=1, width=\linewidth]{figures/pictures.pdf}
+    \includegraphics[page=1, width=0.7\linewidth]{figures/pictures.pdf}
     \caption{光栅化绘制流水线}
     \label{fig:rasterize_pipeline}
 \end{figure}
@@ -77,9 +77,9 @@
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\linewidth]{figures/RealityGraphics-Page2-Crop.pdf}
+    \includegraphics[width=0.8\linewidth]{figures/RealityGraphics-Page2-Crop-Zh.pdf}
     \caption{RealityEngine Graphics 架构图\cite{RealityEngineSGI}}
-    \note{注：每个灰色区域代表一块独立的电路板。Geometry Board 为负责顶点变换的电路板，其中包含有命令处理器、几何引擎。Raster Memory Board 为光栅化电路板，其负责接收三角形，并生成对应的片元，同时进行着色操作。Display Generator Board 负责连接显示器，从显存中读取图像，并负责显示信号的生成。}
+    \note{注：每个灰色区域代表一块独立的电路板。几何板卡为负责顶点变换的电路板，其中包含有命令处理器、几何引擎。光栅化内存板卡为光栅化电路板，其负责接收三角形，并生成对应的片元，同时进行着色操作。显示生成板卡负责连接显示器，从显存中读取图像，并负责显示信号的生成。}
     \label{fig:reality_engine_graphics}
 \end{figure}
 
@@ -87,7 +87,7 @@
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\linewidth]{figures/Volta_archi-crop.pdf}
+    \includegraphics[width=1.0\linewidth]{figures/Volta_archi-crop-zh.pdf}
     \caption{NVIDIA Volta 架构图\cite{9138922}}
     \note{注：架构图中左边为 GPU 整体架构的示意图，由上到下分别为线程块调度器，流多处理器（SM），互联网络，内存控制器和缓存，以及对应的 HBM 内存。右侧为一个流多处理器内部的结构示意，其中由上到下分别为指令缓存、线程束调度器、寄存器堆、后端执行单元、Crossbar 互联网络、以及各个执行单元公用的共享内存和常量缓存。}
     \label{fig:volta_arch}
@@ -124,7 +124,7 @@
 % TODO introduce SPIR-V
 \begin{figure}
     \centering
-    \includegraphics[page=3, width=0.8\linewidth, trim=50 50 50 50, clip]{figures/pictures.pdf}
+    \includegraphics[page=3, width=0.6\linewidth, trim=50 50 50 50, clip]{figures/pictures.pdf}
     \caption{SPIR-V 生态系统}
     % \note{注：语言或指令序列以矩形展示，编译器以圆角矩形展示。}
     \label{fig:spirv_ecosystem}
@@ -279,7 +279,7 @@ $$
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=1.0\linewidth]{figures/roofline.pdf}
+  \includegraphics[width=0.7\linewidth]{figures/roofline.pdf}
   \caption{Roofline 模型中可达性能 $ P $ 关于计算强度 $ I $ 的关系图}
   % \note{注：图中的 I 区域代表由于内存带宽限制了可达性能的访存瓶颈（Memory bound）区，而 II 区域代表由于运算器速率限制了可达性能的计算瓶颈（Compute bound）区。这里假设计算系统参数 $\pi$ = 10 FLOPS，$\beta$ = 1 字节。}
   \label{fig:roofline_graph}
