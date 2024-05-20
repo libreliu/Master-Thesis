@@ -29,6 +29,15 @@
     {\newcommand{\added}{\color{blue}}}
     {\newcommand{\added}{}}
 
+% fix resizebox 伪粗问题
+% https://github.com/mohuangrui/ucasthesis/issues/335
+
+\usepackage{etoolbox}
+\makeatletter
+\appto{\@floatboxreset}{\special{pdf:code q}}
+\preto{\@endfloatbox}{\special{pdf:code Q}}
+\makeatother
+
 \begin{document}
 
 \maketitle
